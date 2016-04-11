@@ -12,5 +12,14 @@ var elixir = require('laravel-elixir');
  */
 
 elixir(function(mix) {
-    mix.sass('app.scss');
+    mix
+        .scripts([
+            '/jquery/dist/jquery.min.js',
+            '/bootstrap-sass/assets/javascripts/bootstrap.min.js',
+        ], "public/js/dependencies.js", "node_modules")
+        .scriptsIn('resources/assets/js', 'public/js/app.js')
+        .sass('app.scss')
+        .browserSync({
+            proxy: 'crm.dev'
+        });
 });

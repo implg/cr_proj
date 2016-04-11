@@ -1,2 +1,10 @@
-// @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.fa-btn {
+  margin-right: 6px;
+}
 
