@@ -12,10 +12,10 @@
         <div class='page-header'>
             <div class='btn-toolbar pull-right'>
                 <div class='btn-group'>
-                    <a class='btn btn-primary' href="{{ route('sentinel.users.create') }}">Create User</a>
+                    <a class='btn btn-primary' href="{{ route('sentinel.users.create') }}">Создать пользователя</a>
                 </div>
             </div>
-            <h1>Current Users</h1>
+            <h1>Список пользователей</h1>
         </div>
     </div>
 
@@ -23,28 +23,23 @@
         <div class="table-responsive">
             <table class="table table-striped table-hover">
                 <thead>
-                <th>User</th>
-                <th>Status</th>
-                <th>Options</th>
+                <th>Имя</th>
+                <th>Статус</th>
+                <th>Действия</th>
                 </thead>
                 <tbody>
                 @foreach ($users as $user)
                     <tr>
-                        <td><a href="{{ route('sentinel.users.show', array($user->hash)) }}">{{ $user->email }}</a></td>
-                        <td>{{ $user->status }} </td>
+                        <td><a href="{{ route('sentinel.users.show', array($user->hash)) }}">{{ $user->first_name }} {{ $user->last_name }}</a></td>
+                        <td>{{ $user->status == 'Banned'? 'Заблокирован' : 'Активен' }} </td>
                         <td>
-                            <button class="btn btn-default" type="button" onClick="location.href='{{ route('sentinel.users.edit', array($user->hash)) }}'">Edit</button>
-                            @if ($user->status != 'Suspended')
-                                <button class="btn btn-default" type="button" onClick="location.href='{{ route('sentinel.users.suspend', array($user->hash)) }}'">Suspend</button>
-                            @else
-                                <button class="btn btn-default" type="button" onClick="location.href='{{ route('sentinel.users.unsuspend', array($user->hash)) }}'">Un-Suspend</button>
-                            @endif
+                            <button class="btn btn-default" type="button" onClick="location.href='{{ route('sentinel.users.edit', array($user->hash)) }}'">Изменить</button>
                             @if ($user->status != 'Banned')
-                                <button class="btn btn-default" type="button" onClick="location.href='{{ route('sentinel.users.ban', array($user->hash)) }}'">Ban</button>
+                                <button class="btn btn-default" type="button" onClick="location.href='{{ route('sentinel.users.ban', array($user->hash)) }}'">Заблокировать</button>
                             @else
-                                <button class="btn btn-default" type="button" onClick="location.href='{{ route('sentinel.users.unban', array($user->hash)) }}'">Un-Ban</button>
+                                <button class="btn btn-default" type="button" onClick="location.href='{{ route('sentinel.users.unban', array($user->hash)) }}'">Разблокировать</button>
                             @endif
-                            <button class="btn btn-default action_confirm" href="{{ route('sentinel.users.destroy', array($user->hash)) }}" data-token="{{ Session::getToken() }}" data-method="delete">Delete</button>
+                            <button class="btn btn-default action_confirm" href="{{ route('sentinel.users.destroy', array($user->hash)) }}" data-token="{{ Session::getToken() }}" data-method="delete">Удалить</button>
                         </td>
                     </tr>
                 @endforeach

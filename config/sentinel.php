@@ -49,7 +49,7 @@ return [
     |
     */
 
-    'default_user_groups' => ['Users'],
+    'default_user_groups' => ['Менеджеры'],
 
     /*
     |--------------------------------------------------------------------------
@@ -61,7 +61,7 @@ return [
     |
     */
 
-    'default_permissions' => ['admin', 'users'],
+    'default_permissions' => ['admin', 'manager', 'supply'],
 
     /*
     |--------------------------------------------------------------------------

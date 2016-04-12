@@ -5755,4 +5755,13 @@ body {
 .fa-btn {
   margin-right: 6px; }
 
+.navbar-default {
+  background-color: #1376C9; }
+
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus, .navbar-default .navbar-nav > li > a {
+  color: #fff; }
+
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+  background-color: #1369ba; }
+
 /*# sourceMappingURL=app.css.map */
