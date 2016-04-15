@@ -11,8 +11,8 @@
 |
 */
 
-Route::get('/', array('as' => 'home', function () {
+Route::get('/', ['middleware' => 'sentry.auth', 'as' => 'home', function () {
     return View::make('home');
-}));
+}]);
 
 Route::get('/home', 'HomeController@index');

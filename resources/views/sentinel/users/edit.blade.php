@@ -3,7 +3,7 @@
 {{-- Web site Title --}}
 @section('title')
 @parent
-Edit Profile
+Редактировать профиль
 @stop
 
 {{-- Content --}}
@@ -27,28 +27,28 @@ Edit Profile
 <div class="row">
     <div class='page-header'>
         <h1>
-            Edit
+            Редактировать
             @if ($isProfileUpdate)
-                Your
+                Ваш профиль
             @else
-                {{ $user->email }}'s
+                профиль: {{ $user->first_name }} {{ $user->last_name }}
             @endif
-            Account
+
         </h1>
     </div>
 </div>
 
 @if (! empty($customFields))
 <div class="row">
-    <h4>Profile</h4>
+    <h4>Профиль</h4>
     <div class="well">
         <form method="POST" action="{{ $profileFormAction }}" accept-charset="UTF-8" class="form-horizontal" role="form">
             <input name="_method" value="PUT" type="hidden">
             <input name="_token" value="{{ csrf_token() }}" type="hidden">
 
-            @foreach(config('sentinel.additional_user_fields') as $field => $rules)
+            @foreach(config('sentinel.additional_user_fields_ru') as $field => $ru)
             <div class="form-group {{ ($errors->has($field)) ? 'has-error' : '' }}" for="{{ $field }}">
-                <label for="{{ $field }}" class="col-sm-2 control-label">{{ ucwords(str_replace('_',' ',$field)) }}</label>
+                <label for="{{ $field }}" class="col-sm-2 control-label">{{ $ru }}</label>
                 <div class="col-sm-10">
                     <input class="form-control" name="{{ $field }}" type="text" value="{{ Request::old($field) ? Request::old($field) : $user->$field }}">
                     {{ ($errors->has($field) ? $errors->first($field) : '') }}
@@ -58,7 +58,7 @@ Edit Profile
 
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <input class="btn btn-primary" value="Submit Changes" type="submit">
+                    <input class="btn btn-primary" value="Сохранить изменения" type="submit">
                 </div>
             </div>
 
@@ -69,7 +69,7 @@ Edit Profile
 
 
 <div class="row">
-    <h4>Group Memberships</h4>
+    <h4>Роли</h4>
     <div class="well">
         <form method="POST" action="{{ route('sentinel.users.memberships', $user->hash) }}" accept-charset="UTF-8" class="form-horizontal" role="form">
 
@@ -86,7 +86,7 @@ Edit Profile
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                     <input name="_token" value="{{ csrf_token() }}" type="hidden">
-                    <input class="btn btn-primary" value="Update Memberships" type="submit">
+                    <input class="btn btn-primary" value="Сохранить изменения" type="submit">
                 </div>
             </div>
 
@@ -96,7 +96,7 @@ Edit Profile
 
 
 <div class="row">
-    <h4>Change Password</h4>
+    <h4>Изменить пароль</h4>
     <div class="well">
         <form method="POST" action="{{ $passwordFormAction }}" accept-charset="UTF-8" class="form-inline" role="form">
 
@@ -108,17 +108,17 @@ Edit Profile
             @endif
 
             <div class="form-group {{ $errors->has('newPassword') ? 'has-error' : '' }}">
-                <label for="newPassword" class="sr-only">New Password</label>
-                <input class="form-control" placeholder="New Password" name="newPassword" value="" id="newPassword" type="password">
+                <label for="newPassword" class="sr-only">Новый пароль</label>
+                <input class="form-control" placeholder="Новый пароль" name="newPassword" value="" id="newPassword" type="password">
             </div>
 
             <div class="form-group {{ $errors->has('newPassword_confirmation') ? 'has-error' : '' }}">
-                <label for="newPassword_confirmation" class="sr-only">Confirm New Password</label>
-                <input class="form-control" placeholder="Confirm New Password" name="newPassword_confirmation" value="" id="newPassword_confirmation" type="password">
+                <label for="newPassword_confirmation" class="sr-only">Подтвердите пароль</label>
+                <input class="form-control" placeholder="Подтвердите пароль" name="newPassword_confirmation" value="" id="newPassword_confirmation" type="password">
             </div>
 
             <input name="_token" value="{{ csrf_token() }}" type="hidden">
-            <input class="btn btn-primary" value="Change Password" type="submit">
+            <input class="btn btn-primary" value="Изменить пароль" type="submit">
 
             {{ ($errors->has('oldPassword') ? '<br />' . $errors->first('oldPassword') : '') }}
             {{ ($errors->has('newPassword') ?  '<br />' . $errors->first('newPassword') : '') }}

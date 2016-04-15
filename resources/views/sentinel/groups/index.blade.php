@@ -3,7 +3,7 @@
 {{-- Web site Title --}}
 @section('title')
 @parent
-Groups
+Группы пользователей
 @stop
 
 {{-- Content --}}
@@ -12,10 +12,10 @@ Groups
     <div class='page-header'>
         <div class='btn-toolbar pull-right'>
             <div class='btn-group'>
-                <a class='btn btn-primary' href="{{ route('sentinel.groups.create') }}">Create Group</a>
+                <a class='btn btn-primary' href="{{ route('sentinel.groups.create') }}">Создать группу</a>
             </div>
         </div>
-        <h1>Available Groups</h1>
+        <h1>Доступные группы</h1>
     </div>
 </div>
 
@@ -23,9 +23,9 @@ Groups
     <div class="table-responsive">
         <table class="table table-striped table-hover">
             <thead>
-                <th>Name</th>
-                <th>Permissions</th>
-                <th>Options</th>
+                <th>Название</th>
+                <th>Разрешения</th>
+                <th>Действия</th>
             </thead>
             <tbody>
             @foreach ($groups as $group)
@@ -42,8 +42,8 @@ Groups
                         @endforeach
                     </td>
                     <td>
-                        <button class="btn btn-default" onClick="location.href='{{ route('sentinel.groups.edit', [$group->hash]) }}'">Edit</button>
-                        <button class="btn btn-default action_confirm {{ ($group->name == 'Admins') ? 'disabled' : '' }}" type="button" data-token="{{ csrf_token() }}" data-method="delete" href="{{ route('sentinel.groups.destroy', [$group->hash]) }}">Delete</button>
+                        <button class="btn btn-success" onClick="location.href='{{ route('sentinel.groups.edit', [$group->hash]) }}'">Изменить</button>
+                        <button class="btn btn-danger action_confirm {{ ($group->name == 'Admins') ? 'disabled' : '' }}" type="button" data-token="{{ csrf_token() }}" data-method="delete" href="{{ route('sentinel.groups.destroy', [$group->hash]) }}">Удалить</button>
                     </td>
                 </tr>
             @endforeach

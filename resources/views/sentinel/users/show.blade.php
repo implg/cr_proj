@@ -18,27 +18,27 @@ Home
         }
     ?>
 
-	<h4>Account Profile</h4>
+	<h4>Персональные данные</h4>
 	
   	<div class="well clearfix">
 	    <div class="col-md-8">
 		    @if ($user->first_name)
-		    	<p><strong>First Name:</strong> {{ $user->first_name }} </p>
+		    	<p><strong>Имя:</strong> {{ $user->first_name }} </p>
 			@endif
 			@if ($user->last_name)
-		    	<p><strong>Last Name:</strong> {{ $user->last_name }} </p>
+		    	<p><strong>Фамилия:</strong> {{ $user->last_name }} </p>
 			@endif
 		    <p><strong>Email:</strong> {{ $user->email }}</p>
 		    
 		</div>
 		<div class="col-md-4">
-			<p><em>Account created: {{ $user->created_at }}</em></p>
-			<p><em>Last Updated: {{ $user->updated_at }}</em></p>
-			<button class="btn btn-primary" onClick="location.href='{{ $editAction }}'">Edit Profile</button>
+			<p><em>Дата создания: {{ $user->created_at }}</em></p>
+			<p><em>Последнее обновление: {{ $user->updated_at }}</em></p>
+			<button class="btn btn-primary" onClick="location.href='{{ $editAction }}'">Изменить профиль</button>
 		</div>
 	</div>
 
-	<h4>Group Memberships:</h4>
+	<h4>Роли:</h4>
 	<?php $userGroups = $user->getGroups(); ?>
 	<div class="well">
 	    <ul>
@@ -47,16 +47,8 @@ Home
 					<li>{{ $group['name'] }}</li>
 				@endforeach
 			@else 
-				<li>No Group Memberships.</li>
+				<li>Нет ролей.</li>
 			@endif
 	    </ul>
 	</div>
-	
-	<hr />
-
-	<h4>User Object</h4>
-	<div>
-		<p>{{ var_dump($user) }}</p>
-	</div>
-
 @stop

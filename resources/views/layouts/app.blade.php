@@ -46,11 +46,16 @@
                 @endif
             </ul>
             <ul class="nav navbar-nav navbar-right">
+
+
                 @if (Sentry::check())
-                    <li {!! (Request::is('profile') ? 'class="active"' : '') !!}><a href="{{ route('sentinel.profile.show') }}">{{ Sentry::getUser()->email }}</a>
-                    </li>
-                    <li>
-                        <a href="{{ route('sentinel.logout') }}">Выйти</a>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Sentry::getUser()->first_name }} {{ Sentry::getUser()->last_name }} <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ route('sentinel.profile.show') }}">Личный кабинет</a>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="{{ route('sentinel.logout') }}">Выйти</a></li>
+                        </ul>
                     </li>
                 @else
                     <li {!! (Request::is('login') ? 'class="active"' : '') !!}><a href="{{ route('sentinel.login') }}">Войти</a></li>
@@ -77,6 +82,7 @@
 
 <!-- Javascripts
 ================================================== -->
+<script src="{{ asset('js/dependencies.js') }}"></script>
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('packages/rydurham/sentinel/js/restfulizer.js') }}"></script>
 

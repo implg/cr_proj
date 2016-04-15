@@ -76,7 +76,16 @@ return [
 
     'additional_user_fields' => [
         'first_name' => 'alpha_spaces',
-        'last_name'  => 'alpha_spaces'
+        'last_name'  => 'alpha_spaces',
+        'phone'  => '',
+        'email'  => ''
+    ],
+
+    'additional_user_fields_ru' => [
+        'first_name' => 'Имя',
+        'last_name'  => 'Фамилия',
+        'phone'  => 'Номер телефона',
+        'email'  => 'Email'
     ],
 
     /*
