@@ -30,7 +30,7 @@ Edit Group
                     <div class="panel panel-primary">
                         <div class="panel-heading">Разрешения</div>
                         <div class="panel-body">
-                            <div class="form-group">
+                            <div class="form-group checkbox">
                                 <?php $defaultPermissions = config('sentinel.default_permissions', []); ?>
                                 @foreach ($defaultPermissions as $permission)
                                     <label class="checkbox-inline">
@@ -46,7 +46,7 @@ Edit Group
 
             <input name="_method" value="PUT" type="hidden">
             <input name="_token" value="{{ csrf_token() }}" type="hidden">
-            <input class="btn btn-success" value="Сохранить" type="submit">
+            <input class="btn btn-raised btn-success" value="Сохранить" type="submit">
 
     </form>
 </div>

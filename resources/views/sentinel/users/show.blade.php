@@ -18,9 +18,9 @@ Home
         }
     ?>
 
-	<h4>Персональные данные</h4>
-	
   	<div class="well clearfix">
+
+		<h3>Персональные данные</h3>
 	    <div class="col-md-8">
 		    @if ($user->first_name)
 		    	<p><strong>Имя:</strong> {{ $user->first_name }} </p>
@@ -34,13 +34,13 @@ Home
 		<div class="col-md-4">
 			<p><em>Дата создания: {{ $user->created_at }}</em></p>
 			<p><em>Последнее обновление: {{ $user->updated_at }}</em></p>
-			<button class="btn btn-primary" onClick="location.href='{{ $editAction }}'">Изменить профиль</button>
+			<button class="btn btn-raised btn-primary" onClick="location.href='{{ $editAction }}'">Изменить профиль</button>
 		</div>
 	</div>
 
-	<h4>Роли:</h4>
 	<?php $userGroups = $user->getGroups(); ?>
 	<div class="well">
+		<h3>Роли</h3>
 	    <ul>
 	    	@if (count($userGroups) >= 1)
 		    	@foreach ($userGroups as $group)

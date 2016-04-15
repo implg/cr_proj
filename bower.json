@@ -1,0 +1,22 @@
+{
+  "name": "crm",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Ivan Kolesnikov <impalago@yandex.ru>"
+  ],
+  "license": "MIT",
+  "moduleType": [],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap-material-design": "~0.5.9"
+  }
+}

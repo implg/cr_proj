@@ -12,7 +12,7 @@
     <div class='page-header'>
         <div class='btn-toolbar pull-right'>
             <div class='btn-group'>
-                <a class='btn btn-primary' href="{{ route('sentinel.groups.create') }}">Создать группу</a>
+                <a class='btn btn-raised btn-primary' href="{{ route('sentinel.groups.create') }}">Создать группу</a>
             </div>
         </div>
         <h1>Доступные группы</h1>
@@ -42,8 +42,8 @@
                         @endforeach
                     </td>
                     <td>
-                        <button class="btn btn-success" onClick="location.href='{{ route('sentinel.groups.edit', [$group->hash]) }}'">Изменить</button>
-                        <button class="btn btn-danger action_confirm {{ ($group->name == 'Admins') ? 'disabled' : '' }}" type="button" data-token="{{ csrf_token() }}" data-method="delete" href="{{ route('sentinel.groups.destroy', [$group->hash]) }}">Удалить</button>
+                        <button class="btn btn-raised btn-success btn-sm" onClick="location.href='{{ route('sentinel.groups.edit', [$group->hash]) }}'">Изменить</button>
+                        <button class="btn btn-raised btn-danger btn-sm action_confirm {{ ($group->name == 'Admins') ? 'disabled' : '' }}" type="button" data-token="{{ csrf_token() }}" data-method="delete" href="{{ route('sentinel.groups.destroy', [$group->hash]) }}">Удалить</button>
                     </td>
                 </tr>
             @endforeach

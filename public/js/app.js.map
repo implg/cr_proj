@@ -1,1 +1,1 @@
-{"version":3,"sources":["common.js"],"names":[],"mappings":"AAAA;AACA;AACA","file":"app.js","sourcesContent":["(function() {\n\n});"],"sourceRoot":"/source/"}
+{"version":3,"sources":["common.js"],"names":[],"mappings":"AAAA;AACA;AACA","file":"app.js","sourcesContent":["$(document).ready(function() {\n    $.material.init();\n});"],"sourceRoot":"/source/"}

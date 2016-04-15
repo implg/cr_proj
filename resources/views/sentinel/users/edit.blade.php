@@ -40,8 +40,8 @@
 
 @if (! empty($customFields))
 <div class="row">
-    <h4>Профиль</h4>
     <div class="well">
+        <h3>Профиль</h3>
         <form method="POST" action="{{ $profileFormAction }}" accept-charset="UTF-8" class="form-horizontal" role="form">
             <input name="_method" value="PUT" type="hidden">
             <input name="_token" value="{{ csrf_token() }}" type="hidden">
@@ -58,7 +58,7 @@
 
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <input class="btn btn-primary" value="Сохранить изменения" type="submit">
+                    <input class="btn btn-raised btn-success" value="Сохранить изменения" type="submit">
                 </div>
             </div>
 
@@ -69,12 +69,12 @@
 
 
 <div class="row">
-    <h4>Роли</h4>
     <div class="well">
+        <h3>Роли</h3>
         <form method="POST" action="{{ route('sentinel.users.memberships', $user->hash) }}" accept-charset="UTF-8" class="form-horizontal" role="form">
 
             <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
+                <div class="col-sm-offset-2 col-sm-10 checkbox">
                     @foreach($groups as $group)
                         <label class="checkbox-inline">
                             <input type="checkbox" name="groups[{{ $group->name }}]" value="1" {{ ($user->inGroup($group) ? 'checked' : '') }}> {{ $group->name }}
@@ -86,7 +86,7 @@
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                     <input name="_token" value="{{ csrf_token() }}" type="hidden">
-                    <input class="btn btn-primary" value="Сохранить изменения" type="submit">
+                    <input class="btn btn-raised btn-success" value="Сохранить изменения" type="submit">
                 </div>
             </div>
 
@@ -96,8 +96,8 @@
 
 
 <div class="row">
-    <h4>Изменить пароль</h4>
     <div class="well">
+        <h3>Изменить пароль</h3>
         <form method="POST" action="{{ $passwordFormAction }}" accept-charset="UTF-8" class="form-inline" role="form">
 
             @if(! Sentry::getUser()->hasAccess('admin'))
@@ -118,7 +118,7 @@
             </div>
 
             <input name="_token" value="{{ csrf_token() }}" type="hidden">
-            <input class="btn btn-primary" value="Изменить пароль" type="submit">
+            <input class="btn btn-raised btn-success" value="Изменить пароль" type="submit">
 
             {{ ($errors->has('oldPassword') ? '<br />' . $errors->first('oldPassword') : '') }}
             {{ ($errors->has('newPassword') ?  '<br />' . $errors->first('newPassword') : '') }}

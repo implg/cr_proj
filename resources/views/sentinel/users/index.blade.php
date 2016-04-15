@@ -12,7 +12,7 @@
         <div class='page-header'>
             <div class='btn-toolbar pull-right'>
                 <div class='btn-group'>
-                    <a class='btn btn-primary' href="{{ route('sentinel.users.create') }}">Создать пользователя</a>
+                    <a class='btn btn-raised btn-primary' href="{{ route('sentinel.users.create') }}">Создать пользователя</a>
                 </div>
             </div>
             <h1>Список пользователей</h1>
@@ -35,13 +35,13 @@
                         <td>{{ $user->username }} </td>
                         <td>{{ $user->status == 'Banned'? 'Заблокирован' : 'Активен' }} </td>
                         <td>
-                            <button class="btn btn-success" type="button" onClick="location.href='{{ route('sentinel.users.edit', array($user->hash)) }}'">Изменить</button>
+                            <button class="btn btn-raised btn-success btn-sm" type="button" onClick="location.href='{{ route('sentinel.users.edit', array($user->hash)) }}'">Изменить</button>
                             @if ($user->status != 'Banned')
-                                <button class="btn btn-warning" type="button" onClick="location.href='{{ route('sentinel.users.ban', array($user->hash)) }}'">Заблокировать</button>
+                                <button class="btn btn-raised btn-warning btn-sm" type="button" onClick="location.href='{{ route('sentinel.users.ban', array($user->hash)) }}'">Заблокировать</button>
                             @else
-                                <button class="btn btn-warning" type="button" onClick="location.href='{{ route('sentinel.users.unban', array($user->hash)) }}'">Разблокировать</button>
+                                <button class="btn btn-raised btn-warning btn-sm" type="button" onClick="location.href='{{ route('sentinel.users.unban', array($user->hash)) }}'">Разблокировать</button>
                             @endif
-                            <button class="btn btn-danger action_confirm" href="{{ route('sentinel.users.destroy', array($user->hash)) }}" data-token="{{ Session::getToken() }}" data-method="delete">Удалить</button>
+                            <button class="btn btn-raised btn-danger action_confirm btn-sm" href="{{ route('sentinel.users.destroy', array($user->hash)) }}" data-token="{{ Session::getToken() }}" data-method="delete">Удалить</button>
                         </td>
                     </tr>
                 @endforeach

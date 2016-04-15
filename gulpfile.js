@@ -15,8 +15,10 @@ elixir(function(mix) {
     mix
         .scripts([
             '/jquery/dist/jquery.min.js',
-            '/bootstrap-sass/assets/javascripts/bootstrap.min.js',
-        ], "public/js/dependencies.js", "node_modules")
+            '/bootstrap/dist/js/bootstrap.min.js',
+            '/bootstrap-material-design/dist/js/material.min.js',
+            '/bootstrap-material-design/dist/js/ripples.min.js'
+        ], "public/js/dependencies.js", "bower_components")
         .scriptsIn('resources/assets/js', 'public/js/app.js')
         .sass('app.scss')
         .browserSync({

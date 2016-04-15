@@ -11,8 +11,8 @@
 |
 */
 
-Route::get('/', ['middleware' => 'sentry.auth', 'as' => 'home', function () {
-    return View::make('home');
-}]);
+Route::get('/', ['middleware' => 'sentry.auth', 'as' => 'home', 'uses' => 'BranchesController@getBranches']);
 
-Route::get('/home', 'HomeController@index');
+Route::group(['middleware' => 'sentry.admin'], function() {
+    Route::post('branches/create', ['before' => 'csrf', 'as' => 'create-branch', 'uses' => 'BranchesController@createBranch']);
+});

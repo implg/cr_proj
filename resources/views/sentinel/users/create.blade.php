@@ -68,7 +68,7 @@
         </div>
 
         <input name="_token" value="{{ csrf_token() }}" type="hidden">
-        <input class="btn btn-primary" value="Создать" type="submit">
+        <input class="btn btn-raised btn-primary" value="Создать" type="submit">
 
     </form>
 </div>

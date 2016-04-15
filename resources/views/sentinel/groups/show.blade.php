@@ -14,7 +14,7 @@
 
     <div class="well clearfix">
         <div class="col-md-10">
-            <h4>Разрешения:</h4>
+            <h3>Разрешения:</h3>
             <ul>
                 @foreach ($group->getPermissions() as $key => $value)
                     <li>{{ ucfirst($key) }}</li>
@@ -22,7 +22,7 @@
             </ul>
         </div>
         <div class="col-md-2">
-            <a class="btn btn-primary" href="{{ route('sentinel.groups.edit', array($group->hash)) }}">Редактировать</a>
+            <a class="btn btn-raised btn-primary" href="{{ route('sentinel.groups.edit', array($group->hash)) }}">Редактировать</a>
         </div>
     </div>
 
