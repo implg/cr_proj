@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Branch;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -25,10 +26,17 @@ class BranchesController extends Controller
 
     /**
      * Create new branch
+     * @param Request $request
      */
-    public function createBranch()
+    public function createBranch(Request $request)
     {
+        $this->validate($request, [
+            'branchName' => 'required'
+        ]);
 
-
+        $branch = new Branch;
+        $branch->name = $request->branchName;
+        $branch->save();
+        return redirect()->back();
     }
 }

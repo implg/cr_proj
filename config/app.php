@@ -156,8 +156,10 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        App\Providers\BranchUserProvider::class,
         Sentinel\SentinelServiceProvider::class,
         'Collective\Html\HtmlServiceProvider',
+
 
     ],
 
@@ -207,6 +209,7 @@ return [
 
         'Form' => 'Collective\Html\FormFacade',
         'Html' => 'Collective\Html\HtmlFacade',
+        'BranchUser' => App\Http\Controllers\BranchUserController::class,
 
     ],
 

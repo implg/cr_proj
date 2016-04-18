@@ -14,5 +14,10 @@
 Route::get('/', ['middleware' => 'sentry.auth', 'as' => 'home', 'uses' => 'BranchesController@getBranches']);
 
 Route::group(['middleware' => 'sentry.admin'], function() {
+
+    // Branches
     Route::post('branches/create', ['before' => 'csrf', 'as' => 'create-branch', 'uses' => 'BranchesController@createBranch']);
+
+    // Branch - User
+    Route::post('branch-user/update', ['before' => 'csrf', 'as' => 'update-branch-user', 'uses' => 'BranchUserController@updateBranchUser']);
 });

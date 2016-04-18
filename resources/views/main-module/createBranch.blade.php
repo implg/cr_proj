@@ -10,7 +10,7 @@
 
                     <div class="form-group">
                         <div class="col-sm-10">
-                            <input type="email" class="form-control" id="inputEmail3" placeholder="Название" autofocus>
+                            <input type="text" class="form-control" name="branchName" placeholder="Название" autofocus>
                         </div>
                     </div>
 

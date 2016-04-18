@@ -94,6 +94,45 @@
     </div>
 </div>
 
+<div class="row">
+    <div class="well">
+        <h3>Доступ к предприятим</h3>
+
+
+        <div class="not-full-access">
+            <form method="POST" action="{{ route('update-branch-user', $user->hash) }}" accept-charset="UTF-8" class="form-horizontal" role="form">
+
+                <div class="form-group full-access">
+                    <div class="col-sm-offset-2 col-sm-10 checkbox">
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="fullAccess" value="{{ $user->full_access }}" > Полный доступ
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group not-full-access">
+                    <div class="col-sm-offset-2 col-sm-10 checkbox">
+                        @foreach(BranchUser::getListBranches() as $branch)
+                            <label class="checkbox-inline">
+                                <input type="checkbox" name="branches[]" value="{{ $branch->id }}" {{ (BranchUser::inBranch($user->id, $branch->id) ? 'checked' : '') }}> {{ $branch->name }}
+                            </label>
+                        @endforeach
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <input name="_token" value="{{ csrf_token() }}" type="hidden">
+                        <input name="userId" value="{{ $user->id }}" type="hidden">
+                        <input class="btn btn-raised btn-success" value="Сохранить изменения" type="submit">
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
 
 <div class="row">
     <div class="well">
