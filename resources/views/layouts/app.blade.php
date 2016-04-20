@@ -29,7 +29,7 @@
 <body>
 
 <nav class="navbar navbar-default ">
-    <div class="container">
+    <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="icon-bar"></span>
@@ -69,7 +69,7 @@
 </nav>
 
 <!-- Container -->
-<div class="container">
+<div class="container-fluid">
     <!-- Notifications -->
     @include('Sentinel::layouts/notifications')
     <!-- ./ notifications -->
@@ -85,6 +85,6 @@
 <script src="{{ asset('js/dependencies.js') }}"></script>
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('packages/rydurham/sentinel/js/restfulizer.js') }}"></script>
-
+@stack('scripts')
 </body>
 </html>

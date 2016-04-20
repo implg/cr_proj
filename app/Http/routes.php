@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', ['middleware' => 'sentry.auth', 'as' => 'home', 'uses' => 'BranchesController@getBranches']);
+Route::get('/', ['middleware' => 'sentry.auth', 'as' => 'home', 'uses' => 'MainController@index']);
 
 Route::group(['middleware' => 'sentry.admin'], function() {
 
@@ -20,4 +20,10 @@ Route::group(['middleware' => 'sentry.admin'], function() {
 
     // Branch - User
     Route::post('branch-user/update', ['before' => 'csrf', 'as' => 'update-branch-user', 'uses' => 'BranchUserController@updateBranchUser']);
+
+    // Groups
+    Route::post('groups-company/create', ['before' => 'csrf', 'as' => 'create-group', 'uses' => 'GroupsController@createGroup']);
+
+    // Company
+    Route::resource('company', 'CompanyController');
 });

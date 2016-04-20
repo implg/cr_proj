@@ -51,11 +51,18 @@ class BranchUserController extends Controller
     public function updateBranchUser(Request $request)
     {
         $user = User::find($request->userId);
-        if(count($request->branches)) {
-            $user->branches()->sync($request->branches);
-        } else {
+        if($request->has('fullAccess')) {
+            $user->full_access = 1;
+            $user->save();
             $user->branches()->detach();
-
+        } else {
+            if(count($request->branches)) {
+                $user->branches()->sync($request->branches);
+            } else {
+                $user->branches()->detach();
+            }
+            $user->full_access = 0;
+            $user->save();
         }
 
         $request->session()->flash('success', 'Данные успешно обновлены');

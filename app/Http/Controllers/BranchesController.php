@@ -12,16 +12,28 @@ class BranchesController extends Controller
 {
 
     /**
+     * BranchesController constructor.
+     */
+    public function __construct()
+    {
+        $this->userId = Sentry::getUser()->id;
+    }
+
+    /**
      * Get all the branches opened by the user
      *
      * @return string
      */
     public function getBranches()
     {
-        $userId = Sentry::getUser()->id;
-        $branches = User::find($userId)->branches;
-        //dd($branches);
-        return view('main-module.index');
+
+        if(Sentry::getUser()->hasAccess('admin')) {
+            $branches = Branch::all();
+        } else {
+            $branches = User::find($this->userId)->branches;
+        }
+
+        return $branches;
     }
 
     /**
@@ -37,6 +49,7 @@ class BranchesController extends Controller
         $branch = new Branch;
         $branch->name = $request->branchName;
         $branch->save();
+        $request->session()->flash('success', 'Филлиал успешно создан!');
         return redirect()->back();
     }
 }

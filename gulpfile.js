@@ -17,7 +17,11 @@ elixir(function(mix) {
             '/jquery/dist/jquery.min.js',
             '/bootstrap/dist/js/bootstrap.min.js',
             '/bootstrap-material-design/dist/js/material.min.js',
-            '/bootstrap-material-design/dist/js/ripples.min.js'
+            '/bootstrap-material-design/dist/js/ripples.min.js',
+            '/bootstrap-select/dist/js/bootstrap-select.min.js',
+            '/bootstrap-select/dist/js/i18n/defaults-ru_RU.min.js',
+            '/datatables.net/js/jquery.dataTables.min.js',
+            '/datatables.net-buttons/js/dataTables.buttons.min.js'
         ], "public/js/dependencies.js", "bower_components")
         .scriptsIn('resources/assets/js', 'public/js/app.js')
         .sass('app.scss')

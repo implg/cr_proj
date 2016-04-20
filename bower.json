@@ -17,6 +17,9 @@
     "tests"
   ],
   "dependencies": {
-    "bootstrap-material-design": "~0.5.9"
+    "bootstrap-material-design": "~0.5.9",
+    "datatables.net-dt": "~1.10.11",
+    "datatables.net-buttons": "~1.1.2",
+    "datatables.net-buttons-dt": "~1.1.2"
   }
 }

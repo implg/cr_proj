@@ -1,22 +1,3 @@
-$(document).ready(function() {
-    $.material.init();
-});
-
-(function () {
-
-    if(!$('.full-access').prop('checked')) {
-        $('.not-full-access').show();
-    }
-
-    $('.full-access').on('click', function() {
-        if(!$('.full-access').prop('checked')) {
-            $('.not-full-access').show();
-        } else {
-            $('.not-full-access').hide();
-        }
-    });
-
-})();
 (function ($, DataTable) {
     "use strict";
 
@@ -116,5 +97,3 @@ $(document).ready(function() {
         }
     };
 })(jQuery, jQuery.fn.dataTable);
-
-//# sourceMappingURL=app.js.map

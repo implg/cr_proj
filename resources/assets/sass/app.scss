@@ -1,6 +1,9 @@
 @import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
 @import "bower_components/bootstrap-material-design/dist/css/bootstrap-material-design.min";
 @import "bower_components/bootstrap-material-design/dist/css/ripples.min";
+@import "bower_components/bootstrap-select/dist/css/bootstrap-select.min";
+@import "bower_components/datatables.net-dt/css/jquery.dataTables.min";
+@import "bower_components/datatables.net-buttons-dt/css/buttons.dataTables.min";
 
 body {
   font-family: 'Open Sans', sans-serif;
@@ -14,10 +17,18 @@ body {
   padding: 0;
 }
 
+.form-group {
+  margin: 10px 0 0 0;
+}
+
 .form-group label.control-label {
   font-size: 14px;
   color: #868686;
   margin: 5px 0 0 0;
+}
+
+.form-group label.control-label {
+  color: #313131;
 }
 
 .table tbody>tr>td{
@@ -26,4 +37,77 @@ body {
 
 h3 {
   margin-bottom: 20px;
+}
+
+.not-full-access {
+  display: none;
+}
+
+.selectbox {
+  .btn-default {
+    border: 1px solid #666;
+    padding: 6px 25px 5px 10px;
+    font-size: 12px;
+    width: 100%;
+  }
+}
+
+.bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
+  width: 100%;
+}
+
+.btn {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.page-header {
+  border-bottom: 1px solid #9A9A9A;
+}
+
+.form-group.label-floating label.control-label, .form-group.label-placeholder label.control-label {
+  top: 0;
+}
+
+.form-group.label-floating.is-focused label.control-label, .form-group.label-floating:not(.is-empty) label.control-label, .form-group.label-static label.control-label {
+  top: -15px;
+}
+
+form {
+  margin-bottom: 20px;
+}
+
+.navbar .navbar-nav > li > a {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+hr {
+  border-top: 1px solid #adadad;
+  margin-top: 10px;
+  margin-bottom: 8px;
+}
+
+.companies {
+  h3 {
+    margin-top: 10px;
+  }
+}
+
+table.dataTable tbody th, table.dataTable tbody td {
+  padding: 3px 5px;
+  font-size: 14px;
+}
+
+table.dataTable thead th, table.dataTable thead td {
+  padding: 4px 5px;
+  font-size: 14px;
+  background-color: #009688;
+  color: #fff;
+}
+
+.company-table {
+  label {
+    color: #292929;
+  }
 }
