@@ -21,7 +21,9 @@ elixir(function(mix) {
             '/bootstrap-select/dist/js/bootstrap-select.min.js',
             '/bootstrap-select/dist/js/i18n/defaults-ru_RU.min.js',
             '/datatables.net/js/jquery.dataTables.min.js',
-            '/datatables.net-buttons/js/dataTables.buttons.min.js'
+            '/datatables.net-buttons/js/dataTables.buttons.min.js',
+            '/jquery-confirm2/dist/jquery-confirm.min.js',
+            '/Split.js/split.min.js'
         ], "public/js/dependencies.js", "bower_components")
         .scriptsIn('resources/assets/js', 'public/js/app.js')
         .sass('app.scss')

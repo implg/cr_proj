@@ -16,13 +16,13 @@ Route::get('/', ['middleware' => 'sentry.auth', 'as' => 'home', 'uses' => 'MainC
 Route::group(['middleware' => 'sentry.admin'], function() {
 
     // Branches
-    Route::post('branches/create', ['before' => 'csrf', 'as' => 'create-branch', 'uses' => 'BranchesController@createBranch']);
+    Route::resource('branches', 'BranchesController');
+
+    // Groups
+    Route::resource('groups-company', 'GroupsController');
 
     // Branch - User
     Route::post('branch-user/update', ['before' => 'csrf', 'as' => 'update-branch-user', 'uses' => 'BranchUserController@updateBranchUser']);
-
-    // Groups
-    Route::post('groups-company/create', ['before' => 'csrf', 'as' => 'create-group', 'uses' => 'GroupsController@createGroup']);
 
     // Company
     Route::resource('company', 'CompanyController');

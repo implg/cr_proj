@@ -3,16 +3,17 @@
 {{-- Web site Title --}}
 @section('title')
 @parent
-Edit Group
+Редактирование группы
 @stop
 
 {{-- Content --}}
 @section('content')
 <div class="row">
-    <form method="POST" action="{{ route('sentinel.groups.update', $group->hash) }}" accept-charset="UTF-8">
-        <div class="page-header">
-            <h2>Редактирование группы</h2>
-        </div>
+    <div class="col-md-10 col-md-offset-1">
+        <form method="POST" action="{{ route('sentinel.groups.update', $group->hash) }}" accept-charset="UTF-8">
+            <div class="page-header">
+                <h2>Редактирование группы</h2>
+            </div>
 
             <div class="row">
                 <div class="col-md-6">
@@ -48,7 +49,8 @@ Edit Group
             <input name="_token" value="{{ csrf_token() }}" type="hidden">
             <input class="btn btn-raised btn-success" value="Сохранить" type="submit">
 
-    </form>
+        </form>
+    </div>
 </div>
 
 @stop

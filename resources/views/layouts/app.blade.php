@@ -9,7 +9,7 @@
     </title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Fonts -->
     <link href='https://fonts.googleapis.com/css?family=Open+Sans&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/icon?family=Material+Icons">
@@ -40,10 +40,13 @@
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a href="/">Предприятия</a></li>
-                <li><a href="/">Задачи</a></li>
-                <li><a href="/">Логи</a></li>
-                <li><a href="/">Помощь</a></li>
+                @if (Sentry::check())
+                    <li><a href="/">Предприятия</a></li>
+                    <li><a href="{{ route('branches.index') }}">Филиалы</a></li>
+                    <li><a href="{{ route('groups-company.index') }}">Группы</a></li>
+                    <li><a href="/">Логи</a></li>
+                    <li><a href="/">Помощь</a></li>
+                @endif
             </ul>
             <ul class="nav navbar-nav navbar-right">
 

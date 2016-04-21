@@ -1,7 +1,7 @@
 <div class="modal fade create-group">
     <div class="modal-dialog">
         <div class="modal-content">
-            {!! Form::open(array('route' => 'create-group', 'class' => 'form-horizontal')) !!}
+            {!! Form::open(array('route' => 'groups-company.store', 'class' => 'form-horizontal')) !!}
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 <h4 class="modal-title">Создать группу</h4>

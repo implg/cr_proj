@@ -47,7 +47,22 @@ class CompanyController extends Controller
                 'company.email'
             ]);
 
-        return Datatables::of($companies)->make(true);
+        return Datatables::of($companies)
+            ->addColumn('action', function ($company) {
+                return '
+                    <a href="/company/' . $company->id . '/edit" class="btn btn-xs btn-raised btn-primary pull-left"><i class="material-icons">mode_edit</i> Изменить</a>
+                    <form action="/company/' . $company->id . '" method="POST" class="pull-left" onsubmit="deleteName(this);return false;">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token" value="'. csrf_token() .'">
+                        <button class="btn btn-xs btn-raised btn-warning" type="submit">Удалить</button>
+                    </form>
+                ';
+            })
+            ->setRowClass('company')
+            ->setRowAttr([
+                'data-id' => '{{$id}}',
+            ])
+            ->make(true);
 
     }
 
@@ -98,7 +113,14 @@ class CompanyController extends Controller
      */
     public function edit($id)
     {
-        //
+        $company = Company::find($id);
+        $branches = $this->branches->getBranches();
+        $groups = $this->groups->getGroups();
+        return view('main-module/company.update', [
+            'branches' => $branches,
+            'groups' => $groups,
+            'company' => $company
+        ]);
     }
 
     /**
@@ -110,17 +132,24 @@ class CompanyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $company = Company::find($id);
+        $company->update($request->except('_token'));
+        $request->session()->flash('success', 'Предприятие "' . $company->name . '" успешно изменено!');
+        return redirect(route('home'));
     }
 
     /**
      * Remove the specified resource from storage.
      *
+     * @param Request $request
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        dd($id);
+        Company::destroy($id);
+        $request->session()->flash('success', 'Предприятие успешно Удалено!');
+        return redirect(route('home'));
     }
 }

@@ -28,7 +28,7 @@
     <div class="col-md-10 col-md-offset-1">
 
         <div class='page-header'>
-            <h1>
+            <h2>
                 Редактировать
                 @if ($isProfileUpdate)
                     Ваш профиль
@@ -36,7 +36,7 @@
                     профиль: {{ $user->first_name }} {{ $user->last_name }}
                 @endif
 
-            </h1>
+            </h2>
         </div>
 
         @if (! empty($customFields))

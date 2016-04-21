@@ -1,7 +1,13 @@
 $(document).ready(function() {
     $.material.init();
 });
-
+$(document).ready(function() {
+    Split(['#companies', '#events'], {
+        direction: 'vertical',
+        sizes: [50, 50],
+        minSize: 200
+    });
+});
 (function () {
 
     if(!$('.full-access').prop('checked')) {

@@ -3,14 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Branch;
-use App\User;
 use Illuminate\Http\Request;
-use App\Http\Requests;
 use Sentry;
+
+use App\Http\Requests;
 
 class BranchesController extends Controller
 {
-
     /**
      * BranchesController constructor.
      */
@@ -20,9 +19,19 @@ class BranchesController extends Controller
     }
 
     /**
-     * Get all the branches opened by the user
+     * Display a listing of the resource.
      *
-     * @return string
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $branches = Branch::all();
+
+        return view('main-module/branches.index', ['branches' => $branches]);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
     public function getBranches()
     {
@@ -37,10 +46,22 @@ class BranchesController extends Controller
     }
 
     /**
-     * Create new branch
-     * @param Request $request
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function createBranch(Request $request)
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
     {
         $this->validate($request, [
             'branchName' => 'required'
@@ -50,6 +71,53 @@ class BranchesController extends Controller
         $branch->name = $request->branchName;
         $branch->save();
         $request->session()->flash('success', 'Филлиал успешно создан!');
+        return redirect()->back();
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Request $request,$id)
+    {
+        Branch::destroy($id);
+        $request->session()->flash('success', 'Филиал успешно удален!');
         return redirect()->back();
     }
 }
