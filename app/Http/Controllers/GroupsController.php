@@ -16,7 +16,9 @@ class GroupsController extends Controller
      */
     public function index()
     {
-        //
+        $groups = GroupsCompany::all();
+
+        return view('main-module/groups-company.index', ['groups' => $groups]);
     }
 
     /**
@@ -47,11 +49,11 @@ class GroupsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'groupName' => 'required'
+            'name' => 'required'
         ]);
 
         $branch = new GroupsCompany;
-        $branch->name = $request->groupName;
+        $branch->name = $request->name;
         $branch->save();
         $request->session()->flash('success', 'Группа успешно создана!');
         return redirect()->back();
@@ -76,7 +78,8 @@ class GroupsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $group = GroupsCompany::findOrFail($id);
+        return view('main-module/groups-company.update', ['group' => $group]);
     }
 
     /**
@@ -88,7 +91,11 @@ class GroupsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $group = GroupsCompany::find($id);
+        $group->name = $request->name;
+        $group->save();
+        $request->session()->flash('success', 'Группа "' . $group->name . '" успешно изменена!');
+        return redirect(route('groups-company.index'));
     }
 
     /**
@@ -97,8 +104,10 @@ class GroupsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        GroupsCompany::destroy($id);
+        $request->session()->flash('success', 'Группа успешно удалена!');
+        return redirect()->back();
     }
 }

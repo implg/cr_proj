@@ -24,6 +24,8 @@ Route::group(['middleware' => 'sentry.admin'], function() {
     // Branch - User
     Route::post('branch-user/update', ['before' => 'csrf', 'as' => 'update-branch-user', 'uses' => 'BranchUserController@updateBranchUser']);
 
-    // Company
-    Route::resource('company', 'CompanyController');
+
 });
+
+// Company
+Route::resource('company', 'CompanyController');

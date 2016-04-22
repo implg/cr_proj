@@ -24,7 +24,8 @@
                     </ul>
                 </div>
                 <div class="col-md-2"><br>
-                    <a class="btn btn-raised btn-primary" href="{{ route('sentinel.groups.edit', array($group->hash)) }}">Редактировать</a>
+                    <a class="btn btn-raised btn-primary"
+                       href="{{ route('sentinel.groups.edit', array($group->hash)) }}">Редактировать</a>
                 </div>
             </div>
         </div>

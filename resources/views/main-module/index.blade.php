@@ -35,8 +35,6 @@
 
     <div class="row filter">
         <div class="col-md-12">
-            <h3 class="pull-left">Фильтр</h3>
-
             @if(count($branches))
                 <div class="pull-left">
                     <div class="selectbox">
@@ -64,7 +62,7 @@
         </div>
     </div>
 
-    <div id="companies">
+    <div id="companies" class="row">
         <div class="company-table">
             <div class="col-md-12">
                 <table class="table table-bordered" id="company-table">
@@ -87,13 +85,13 @@
     </div>
 
     <div id="events">
-        dfsdfsdfsdf
+
     </div>
 
 @endsection
 
-@include('main-module/branches.branchCreateModal', ['modalName' => 'Изменить филиал'])
-@include('main-module/modals.createGroup')
+@include('main-module/branches.branchCreateModal')
+@include('main-module/groups-company.groupCreateModal')
 
 @push('scripts')
 <script>
@@ -116,18 +114,18 @@
                 {data: 'name', name: 'company.name', title: 'Название'},
                 {data: 'branch_name', name: 'branch_id', title: 'Филиал'},
                 {data: 'group_name', name: 'group_id', title: 'Группа'},
-                {data: 'status', name: 'company.status', title: 'Статус'},
+                {data: 'status', name: 'company.status', title: 'Статус', className: "status-column"},
                 {data: 'phones', name: 'company.phones', title: 'Телефоны'},
                 {data: 'director', name: 'company.director', title: 'Директор'},
                 {data: 'email', name: 'company.email', title: 'Email'},
-                {data: 'action', name: 'action', orderable: false, searchable: false}
+                {data: 'action', name: 'action', orderable: false, searchable: false, width: "8%", className: "text-center"}
             ]
         });
 
         $('#company-table tbody').on('click', 'tr', function () {
 //            var data = table.row( this ).data();
 //            alert( 'You clicked on '+data[0]+'\'s row' );
-        } );
+        });
     });
 
     function deleteName(f) {
@@ -138,7 +136,7 @@
             confirmButton: 'Удалить',
             cancelButton: 'Отмена',
             content: 'Вы уверены, что хотите удалить это предприятие?<br>Эта операция не восстановима.',
-            confirm: function(){
+            confirm: function () {
                 f.submit();
             }
         });

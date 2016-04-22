@@ -45,7 +45,7 @@ h3 {
 }
 
 .selectbox {
-  margin: 0 10px;
+  margin-right: 20px;
   .btn-default {
     border: 1px solid #666;
     padding: 6px 25px 5px 10px;
@@ -62,7 +62,7 @@ h3 {
   margin-top: 0;
   margin-bottom: 0;
   i {
-    font-size: 15px;
+    font-size: 18px;
   }
 }
 
@@ -157,6 +157,12 @@ body .container-fluid .well {
 
 #companies {
   overflow: auto;
+  position: relative;
+  top: -40px;
+
+  #company-table_filter {
+    margin-bottom: 15px;
+  }
 
   form {
     margin-bottom: 0;
@@ -175,3 +181,38 @@ body .container-fluid .well {
 .jconfirm-box {
   margin-top: 100px !important;
 }
+
+table {
+  font-size: 14px;
+  .btn {
+    margin-right: 10px;
+  }
+}
+
+.btn.bs-invalid {
+  border: 1px solid red !important;
+}
+
+.btn-group-sm .btn.btn-fab, .btn-group-sm .input-group-btn .btn.btn-fab, .btn.btn-fab.btn-fab-mini, .input-group-btn .btn.btn-fab.btn-fab-mini {
+  height: 25px;
+  min-width: 25px;
+  width: 25px;
+}
+
+.text-center {
+  form {
+    display: inline-block;
+  }
+
+  .btn:not(.btn-raised):not(.btn-link):hover {
+    background-color: rgb(68, 68, 68);
+  }
+}
+
+.status-column {
+  img {
+    width: 20px;
+  }
+}
+
+

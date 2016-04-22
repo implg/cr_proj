@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <title>
         @section('title')
         @show
@@ -11,7 +11,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Fonts -->
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans&subset=latin,cyrillic' rel='stylesheet'
+          type='text/css'>
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/icon?family=Material+Icons">
 
     <!-- Styles -->
@@ -42,8 +43,11 @@
             <ul class="nav navbar-nav">
                 @if (Sentry::check())
                     <li><a href="/">Предприятия</a></li>
-                    <li><a href="{{ route('branches.index') }}">Филиалы</a></li>
-                    <li><a href="{{ route('groups-company.index') }}">Группы</a></li>
+                    @if (Sentry::getUser()->hasAccess('admin'))
+                        <li><a href="{{ route('branches.index') }}">Филиалы</a></li>
+                        <li><a href="{{ route('groups-company.index') }}">Группы</a></li>
+                    @endif
+                    <li><a href="/">Задачи</a></li>
                     <li><a href="/">Логи</a></li>
                     <li><a href="/">Помощь</a></li>
                 @endif
@@ -52,11 +56,18 @@
 
                 @if (Sentry::check())
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="material-icons">keyboard_arrow_down</i> {{ Sentry::getUser()->first_name }} {{ Sentry::getUser()->last_name }}</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false"><i
+                                    class="material-icons">keyboard_arrow_down</i> {{ Sentry::getUser()->first_name }} {{ Sentry::getUser()->last_name }}
+                        </a>
                         <ul class="dropdown-menu">
                             @if (Sentry::check() && Sentry::getUser()->hasAccess('admin'))
-                                <li {!! (Request::is('users*') ? 'class="active"' : '') !!}><a href="{{ action('\\Sentinel\Controllers\UserController@index') }}">Пользователи</a></li>
-                                <li {!! (Request::is('groups*') ? 'class="active"' : '') !!}><a href="{{ action('\\Sentinel\Controllers\GroupController@index') }}">Группы пользователей</a></li>
+                                <li {!! (Request::is('users*') ? 'class="active"' : '') !!}><a
+                                            href="{{ action('\\Sentinel\Controllers\UserController@index') }}">Пользователи</a>
+                                </li>
+                                <li {!! (Request::is('groups*') ? 'class="active"' : '') !!}><a
+                                            href="{{ action('\\Sentinel\Controllers\GroupController@index') }}">Группы
+                                        пользователей</a></li>
                             @endif
                             <li><a href="{{ route('sentinel.profile.show') }}">Личный кабинет</a>
                             <li role="separator" class="divider"></li>
@@ -64,7 +75,8 @@
                         </ul>
                     </li>
                 @else
-                    <li {!! (Request::is('login') ? 'class="active"' : '') !!}><a href="{{ route('sentinel.login') }}">Войти</a></li>
+                    <li {!! (Request::is('login') ? 'class="active"' : '') !!}><a href="{{ route('sentinel.login') }}">Войти</a>
+                    </li>
                 @endif
             </ul>
         </div>
@@ -75,11 +87,11 @@
 <div class="container-fluid">
     <!-- Notifications -->
     @include('Sentinel::layouts/notifications')
-    <!-- ./ notifications -->
+            <!-- ./ notifications -->
 
     <!-- Content -->
     @yield('content')
-    <!-- ./ content -->
+            <!-- ./ content -->
 </div>
 <!-- ./ container -->
 

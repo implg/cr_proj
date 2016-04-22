@@ -14,5 +14,6 @@ class DatabaseSeeder extends Seeder
         $this->call(SentryUserSeederCustom::class);
         $this->call(SentryGroupSeederCustom::class);
         $this->call(SentryUserGroupSeederCustom::class);
+        $this->call(GroupsSeeder::class);
     }
 }

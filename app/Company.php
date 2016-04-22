@@ -22,6 +22,7 @@ class Company extends Model
         'branch_id',
         'group_id',
         'name',
+        'status',
         'phone_accountant',
         'phones',
         'director',

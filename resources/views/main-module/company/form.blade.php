@@ -6,7 +6,8 @@
                 {!! Form::select('branch_id', $branches->lists('name', 'id'), null,
                     [
                         'title' => 'Выберите филиал...',
-                        'class' => 'selectpicker form-control'
+                        'class' => 'selectpicker form-control',
+                        'required'
                     ]
                 ) !!}
             </div>
@@ -17,7 +18,27 @@
                 {!! Form::select('group_id', $groups->lists('name', 'id'), null,
                     [
                         'title' => 'Выберите группу...',
-                        'class' => 'selectpicker form-control'
+                        'class' => 'selectpicker form-control',
+                        'required'
+                    ]
+                ) !!}
+            </div>
+        </div>
+
+        <div class="form-group">
+            {!! Form::label('status', 'Статус', ['class' => 'control-label']) !!}
+            <div class="selectbox">
+                {!! Form::select('status', [
+                        'Без статуса',
+                        'Черный список',
+                        'Налаживаем контакт',
+                        'Работаем',
+                        'VIP',
+                    ], null,
+                    [
+                        'title' => 'Выберите статус...',
+                        'class' => 'selectpicker form-control',
+                        'required'
                     ]
                 ) !!}
             </div>

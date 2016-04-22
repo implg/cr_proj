@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Branch;
+use App\User;
 use Illuminate\Http\Request;
 use Sentry;
 
@@ -64,11 +65,11 @@ class BranchesController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'branchName' => 'required'
+            'name' => 'required'
         ]);
 
         $branch = new Branch;
-        $branch->name = $request->branchName;
+        $branch->name = $request->name;
         $branch->save();
         $request->session()->flash('success', 'Филлиал успешно создан!');
         return redirect()->back();
@@ -93,7 +94,8 @@ class BranchesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $branch = Branch::findOrFail($id);
+        return view('main-module/branches.update', ['branch' => $branch]);
     }
 
     /**
@@ -105,7 +107,11 @@ class BranchesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $branch = Branch::find($id);
+        $branch->name = $request->name;
+        $branch->save();
+        $request->session()->flash('success', 'Филиал "' . $branch->name . '" успешно изменен!');
+        return redirect(route('branches.index'));
     }
 
     /**
