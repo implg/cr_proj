@@ -9619,4 +9619,8 @@ table {
 .status-column img {
   width: 20px; }
 
+.bold {
+  font-weight: bold;
+  color: #9A0000; }
+
 /*# sourceMappingURL=app.css.map */

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\Datatables\Datatables;
 use Sentry;
+use App\Http\Controllers\UsersController;
 
 use App\Http\Requests;
 
@@ -18,14 +19,17 @@ class CompanyController extends Controller
      * CompanyController constructor.
      * @param BranchesController $branchesController
      * @param GroupsController $groupsCompany
+     * @param \App\Http\Controllers\UsersController $usersController
      */
     public function __construct(
         BranchesController $branchesController,
-        GroupsController $groupsCompany
+        GroupsController $groupsCompany,
+        UsersController $usersController
     )
     {
         $this->branches = $branchesController;
         $this->groups = $groupsCompany;
+        $this->users = $usersController;
         $this->userId = Sentry::getUser()->id;
     }
 
@@ -40,11 +44,13 @@ class CompanyController extends Controller
             $companies = DB::table('company')
                 ->leftJoin('branches', 'company.branch_id', '=', 'branches.id')
                 ->leftJoin('groups_company', 'company.group_id', '=', 'groups_company.id')
+                ->leftJoin('users', 'company.manager_id', '=', 'users.id')
                 ->select([
                     'company.id',
                     'company.name',
                     'branches.name as branch_name',
                     'groups_company.name as group_name',
+                    DB::raw('concat(users.first_name, " ", users.last_name) as full_name'),
                     'company.status',
                     'company.phones',
                     'company.director',
@@ -52,20 +58,45 @@ class CompanyController extends Controller
                 ]);
         } else {
             $userBranch = User::find($this->userId)->branches;
-            $companies = DB::table('company')
-                ->whereIn('branch_id', $userBranch->lists('id'))
-                ->leftJoin('branches', 'company.branch_id', '=', 'branches.id')
-                ->leftJoin('groups_company', 'company.group_id', '=', 'groups_company.id')
-                ->select([
-                    'company.id',
-                    'company.name',
-                    'branches.name as branch_name',
-                    'groups_company.name as group_name',
-                    'company.status',
-                    'company.phones',
-                    'company.director',
-                    'company.email'
-                ]);
+
+            if(Sentry::getUser()->hasAccess('manager')) {
+                $companies = DB::table('company')
+                    ->whereIn('branch_id', $userBranch->lists('id'))
+                    ->leftJoin('branches', 'company.branch_id', '=', 'branches.id')
+                    ->leftJoin('groups_company', 'company.group_id', '=', 'groups_company.id')
+                    ->where('groups_company.name', '=', 'Поставщик')
+                    ->leftJoin('users', 'company.manager_id', '=', 'users.id')
+                    ->select([
+                        'company.id',
+                        'company.name',
+                        'branches.name as branch_name',
+                        'groups_company.name as group_name',
+                        DB::raw('concat(users.first_name, " ", users.last_name) as full_name'),
+                        'company.status',
+                        'company.phones',
+                        'company.director',
+                        'company.email'
+                    ]);
+            } else {
+                $companies = DB::table('company')
+                    ->whereIn('branch_id', $userBranch->lists('id'))
+                    ->leftJoin('branches', 'company.branch_id', '=', 'branches.id')
+                    ->leftJoin('groups_company', 'company.group_id', '=', 'groups_company.id')
+                    ->leftJoin('users', 'company.manager_id', '=', 'users.id')
+                    ->select([
+                        'company.id',
+                        'company.name',
+                        'branches.name as branch_name',
+                        'groups_company.name as group_name',
+                        DB::raw('concat(users.first_name, " ", users.last_name) as full_name'),
+                        'company.status',
+                        'company.phones',
+                        'company.director',
+                        'company.email'
+                    ]);
+            }
+
+
         }
 
         return Datatables::of($companies)
@@ -125,9 +156,11 @@ class CompanyController extends Controller
     {
         $branches = $this->branches->getBranches();
         $groups = $this->groups->getGroups();
+        $users = $this->users->getAllUser();
         return view('main-module/company.create', [
             'branches' => $branches,
-            'groups' => $groups
+            'groups' => $groups,
+            'users' => $users
         ]);
     }
 
@@ -166,10 +199,12 @@ class CompanyController extends Controller
         $company = Company::find($id);
         $branches = $this->branches->getBranches();
         $groups = $this->groups->getGroups();
+        $users = $this->users->getAllUser();
         return view('main-module/company.update', [
             'branches' => $branches,
             'groups' => $groups,
-            'company' => $company
+            'company' => $company,
+            'users' => $users
         ]);
     }
 

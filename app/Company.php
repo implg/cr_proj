@@ -21,6 +21,7 @@ class Company extends Model
     protected $fillable = [
         'branch_id',
         'group_id',
+        'manager_id',
         'name',
         'status',
         'phone_accountant',

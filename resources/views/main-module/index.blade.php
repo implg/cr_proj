@@ -72,6 +72,7 @@
                         <th>Название</th>
                         <th>Филиал</th>
                         <th>Группа</th>
+                        <th>Менеджер</th>
                         <th>Статус</th>
                         <th>Телефоны</th>
                         <th>Директор</th>
@@ -114,6 +115,7 @@
                 {data: 'name', name: 'company.name', title: 'Название'},
                 {data: 'branch_name', name: 'branch_id', title: 'Филиал'},
                 {data: 'group_name', name: 'group_id', title: 'Группа'},
+                {data: 'full_name', title: 'Менеджер', className: "bold"},
                 {data: 'status', name: 'company.status', title: 'Статус', className: "status-column"},
                 {data: 'phones', name: 'company.phones', title: 'Телефоны'},
                 {data: 'director', name: 'company.director', title: 'Директор'},

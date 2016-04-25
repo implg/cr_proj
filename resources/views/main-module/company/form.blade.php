@@ -26,6 +26,19 @@
         </div>
 
         <div class="form-group">
+            {!! Form::label('manager_id', 'Менеджер', ['class' => 'control-label']) !!}
+            <div class="selectbox">
+                {!! Form::select('manager_id', $users->lists('full_name', 'id'), null,
+                    [
+                        'title' => 'Выберите менеджера...',
+                        'class' => 'selectpicker form-control',
+                        'required'
+                    ]
+                ) !!}
+            </div>
+        </div>
+
+        <div class="form-group">
             {!! Form::label('status', 'Статус', ['class' => 'control-label']) !!}
             <div class="selectbox">
                 {!! Form::select('status', [
