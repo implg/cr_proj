@@ -23,8 +23,7 @@
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
 <body>
@@ -98,6 +97,7 @@
 <!-- Javascripts
 ================================================== -->
 <script src="{{ asset('js/dependencies.js') }}"></script>
+<script src="{{ asset('libs/datetimepicker-master/build/jquery.datetimepicker.full.min.js') }}"></script>
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('packages/rydurham/sentinel/js/restfulizer.js') }}"></script>
 @stack('scripts')

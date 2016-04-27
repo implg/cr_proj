@@ -36,9 +36,10 @@ class CompanyController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         if (Sentry::getUser()->hasAccess('admin')) {
             $companies = DB::table('company')
@@ -86,7 +87,9 @@ class CompanyController extends Controller
                     ->select([
                         'company.id',
                         'company.name',
+                        'branches.id',
                         'branches.name as branch_name',
+                        'groups_company.id',
                         'groups_company.name as group_name',
                         DB::raw('concat(users.first_name, " ", users.last_name) as full_name'),
                         'company.status',
@@ -100,6 +103,18 @@ class CompanyController extends Controller
         }
 
         return Datatables::of($companies)
+            ->filter(function ($query) use ($request) {
+                if ($request->has('branch_id')) {
+                    $query->where('branches.name', '=', $request->get('branch_id'));
+                }
+                if ($request->has('group_id')) {
+                    $query->where('groups_company.name', '=', $request->get('group_id'));
+                }
+                if ($request->has('status')) {
+                    $query->where('company.status', '=', $request->get('status'));
+                }
+            })
+
             ->addColumn('action', function ($company) {
                 return '
                     <a href="/company/' . $company->id . '/edit" class="btn btn-primary btn-fab btn-fab-mini "><i class="material-icons">mode_edit</i></a>

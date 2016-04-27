@@ -5,6 +5,66 @@
 @import "bower_components/datatables.net-dt/css/jquery.dataTables.min";
 @import "bower_components/datatables.net-buttons-dt/css/buttons.dataTables.min";
 @import "bower_components/jquery-confirm2/dist/jquery-confirm.min";
+@import "public/libs/datetimepicker-master/build/jquery.datetimepicker.min";
+
+
+/*!
+ * StyleSheet for JQuery splitter Plugin
+ * Copyright (C) 2010 Jakub Jankiewicz <http://jcubic.pl>
+ *
+ * Same license as plugin
+ */
+.splitter_panel {
+  position: relative;
+}
+.splitter_panel .vsplitter {
+  background-color: grey;
+  cursor: col-resize;
+  z-index:900;
+  width: 4px;
+}
+
+.splitter_panel .hsplitter {
+  background-color: #5F5F5F;
+  cursor: row-resize;
+  z-index: 800;
+  height: 4px;
+}
+.splitter_panel .vsplitter.splitter-invisible,
+.splitter_panel .hsplitter.splitter-invisible {
+  background: none;
+}
+.splitter_panel .vsplitter, .splitter_panel .left_panel, .splitter_panel .right_panel,
+.splitter_panel .hsplitter, .splitter_panel .top_panel, .splitter_panel .bottom_panel {
+  position: absolute;
+  overflow: auto;
+}
+.splitter_panel .vsplitter, .splitter_panel .left_panel, .splitter_panel .right_panel {
+  height: 100%;
+}
+.splitter_panel .hsplitter, .splitter_panel .top_panel, .splitter_panel .bottom_panel {
+  width: 100%;
+}
+.splitter_panel .top_panel, .splitter_panel .left_panel, .splitter_panel .vsplitter {
+  top: 0;
+}
+.splitter_panel .top_panel, .splitter_panel .bottom_panel, .splitter_panel .left_panel, .splitter_panel .hsplitter {
+  left: 0;
+}
+.splitter_panel .bottom_panel {
+  bottom: 0;
+}
+.splitter_panel .right_panel {
+  right: 0;
+}
+.splitterMask {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+}
 
 body {
   font-family: 'Open Sans', sans-serif;
@@ -100,8 +160,8 @@ hr {
 }
 
 table.dataTable tbody th, table.dataTable tbody td {
-  padding: 3px 5px;
-  font-size: 14px;
+  padding: 2px 5px;
+  font-size: 13px;
 }
 
 table.dataTable thead th, table.dataTable thead td {
@@ -161,7 +221,8 @@ body .container-fluid .well {
   top: -40px;
 
   #company-table_filter {
-    margin-bottom: 15px;
+    margin-bottom: 5px;
+    margin-top: 13px;
   }
 
   form {
@@ -220,3 +281,80 @@ table {
   color: #9A0000;
 }
 
+#search-form {
+  position: relative;
+  z-index: 1000;
+  .btn {
+    margin: 0 4px;
+  }
+}
+
+.bootstrap-select {
+  margin-top: 0;
+}
+
+.form_select {
+  padding: 3px 7px;
+}
+
+.add_event {
+  display: none;
+}
+
+form label {
+  color:#999;
+}
+
+select.custom-select {
+  border: 1px solid #DCDCDC !important;
+  padding: 4px 5px;
+  display: block;
+  width: 100%;
+  background: #fff;
+  margin-bottom: 10px;
+}
+
+.custom-textarea {
+  border: 1px solid #DCDCDC !important;
+  padding: 4px 5px;
+  display: block;
+  width: 100%;
+  background: #fff;
+  margin-bottom: 10px;
+  height: 110px;
+}
+
+.custom-input {
+  border: 1px solid #DCDCDC !important;
+  padding: 4px 5px;
+  display: block;
+  width: 100%;
+  background: #fff;
+  margin-bottom: 10px;
+}
+
+#events {
+  table {
+    tr {
+      td:nth-child(1) {
+        width: 35px;
+
+      }
+      td:nth-child(2) {
+        width: 170px;
+      }
+      td:nth-child(3) {
+        width: 170px;
+      }
+      td:nth-child(4) {
+        width: 170px;
+      }
+    }
+  }
+}
+
+#split {
+  min-height: 700px;
+}
+
+.topPane {}

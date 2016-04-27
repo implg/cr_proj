@@ -157,6 +157,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         App\Providers\BranchUserProvider::class,
+        App\Providers\UsersProvider::class,
         Sentinel\SentinelServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,
         'Collective\Html\HtmlServiceProvider',
@@ -211,6 +212,7 @@ return [
         'Form' => 'Collective\Html\FormFacade',
         'Html' => 'Collective\Html\HtmlFacade',
         'BranchUser' => App\Http\Controllers\BranchUserController::class,
+        'Users' => App\Http\Controllers\UsersController::class,
         'Datatables' => Yajra\Datatables\Facades\Datatables::class,
 
     ],

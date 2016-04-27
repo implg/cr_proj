@@ -42,4 +42,13 @@ class Company extends Model
         'inn',
         'num_certificate'
     ];
+
+
+    /**
+     * Get the events for the company.
+     */
+    public function events()
+    {
+        return $this->hasMany('App\Event');
+    }
 }

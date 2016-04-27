@@ -27,5 +27,14 @@ Route::group(['middleware' => 'sentry.admin'], function() {
 
 });
 
-// Company
-Route::resource('company', 'CompanyController');
+Route::group(['middleware' => 'sentry.auth'], function() {
+
+    // Company
+    Route::resource('company', 'CompanyController');
+
+    // Events
+    Route::resource('events', 'EventsController');
+    Route::get('events-company/{id}', 'EventsController@getEvents');
+});
+
+
