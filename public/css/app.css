@@ -10139,7 +10139,8 @@ table {
   width: 25px; }
 
 .text-center form {
-  display: inline-block; }
+  display: inline-block;
+  margin-bottom: 0; }
 
 .text-center .btn:not(.btn-raised):not(.btn-link):hover {
   background-color: #444444; }

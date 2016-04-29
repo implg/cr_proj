@@ -46,8 +46,8 @@
                         <li><a href="{{ route('branches.index') }}">Филиалы</a></li>
                         <li><a href="{{ route('groups-company.index') }}">Группы</a></li>
                     @endif
-                    <li><a href="/">Задачи</a></li>
-                    <li><a href="/">Логи</a></li>
+                    <li><a href="{{ route('tasks.index') }}">Задачи</a></li>
+                    <li><a href="{{ route('logs.index') }}">Логи</a></li>
                     <li><a href="/">Помощь</a></li>
                 @endif
             </ul>

@@ -87,10 +87,10 @@
             </form>
         </div>
     </div>
-    
+
     <div id="split" class="row">
         <div class="topPane">
-            <div id="companies" >
+            <div id="companies">
                 <div class="company-table">
                     <div class="col-md-12">
                         <table class="table table-bordered" id="company-table">
@@ -121,6 +121,7 @@
     @include('main-module/branches.branchCreateModal')
     @include('main-module/groups-company.groupCreateModal')
     @include('main-module/events.create')
+    @include('main-module/events.update')
 @endsection
 
 
@@ -192,6 +193,7 @@
             $('#branch_id').val("");
             $('#group_id').val("");
             $('#status').val("");
+            $('.event_type').val("");
             table.draw();
         });
 
@@ -224,10 +226,10 @@
             e.preventDefault();
             var responsible_id = $('.responsible_id').val(),
                     company_id = $('.add_event').data('company-id'),
+                    type = $('.event_type').val(),
                     text = $('.event_text').val(),
                     date = $('.event_date').val(),
                     reminder = $('.event_reminder').prop('checked') ? 1 : 0;
-
 
             $.ajax({
                 url: '{!! route('events.store') !!}',
@@ -235,12 +237,65 @@
                 data: {
                     'responsible_id': responsible_id,
                     'company_id': company_id,
+                    'type': type,
                     'text': text,
                     'date': date,
                     'reminder': reminder,
                 },
                 success: function (data) {
-                    $('.create_event').modal('hide')
+                    $('.create_event').modal('hide');
+                    jQuery('.events_store')[0].reset();
+
+                    // Get events for company
+                    $.ajax({
+                        url: 'events-company/' + company_id,
+                        type: 'get',
+                        data: {
+                            'companyId': company_id
+                        },
+                        success: function (data) {
+                            $('#events').html(data);
+                        }
+                    });
+                }
+            });
+        });
+
+        //clear modal form for event editing
+        $('body').on('click', '.event_edit', function (e) {
+            var eventId = $(this).data('event-id');
+            $.get('/events/' + eventId + '/edit', function (data) {
+                $('.update_modal_event .modal-content').html(data);
+                $('.update_modal_event').modal('show');
+                $('.datetimepicker2').datetimepicker();
+            })
+        });
+
+        // Update event
+        $('body').on('submit', '.events_update', function (e) {
+            e.preventDefault();
+            var event_id = $(this).find('input[type=submit]').data('event-id'),
+                    responsible_id = $(this).find('.responsible_id').val(),
+                    company_id = $('.add_event').data('company-id'),
+                    type = $(this).find('.event_type').val(),
+                    text = $(this).find('.event_text').val(),
+                    date = $(this).find('.event_date').val(),
+                    reminder = $('.event_reminder').prop('checked') ? 1 : 0;
+
+            $.ajax({
+                url: '/events/' + event_id,
+                type: 'put',
+                data: {
+                    'responsible_id': responsible_id,
+                    'company_id': company_id,
+                    'type': type,
+                    'text': text,
+                    'date': date,
+                    'reminder': reminder
+                },
+                success: function (data) {
+                    $('.update_modal_event').modal('hide');
+                    console.log(text);
                     // Get events for company
                     $.ajax({
                         url: 'events-company/' + company_id,
@@ -257,7 +312,7 @@
         });
 
         // Delete event
-        $('body').on('click', '.event-destroy', function() {
+        $('body').on('click', '.event-destroy', function () {
             var eventId = $(this).data('event-id');
             var tr = $(this).closest('tr');
 
@@ -272,7 +327,7 @@
                         url: 'events/' + eventId,
                         type: 'delete',
                         success: function (data) {
-                            tr.fadeOut(400, function(){
+                            tr.fadeOut(400, function () {
                                 tr.remove();
                             });
                         }
@@ -282,9 +337,6 @@
 
         });
 
-
-        $.datetimepicker.setLocale('ru');
-        $('#datetimepicker').datetimepicker();
     });
 
 </script>

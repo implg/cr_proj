@@ -35,6 +35,13 @@ Route::group(['middleware' => 'sentry.auth'], function() {
     // Events
     Route::resource('events', 'EventsController');
     Route::get('events-company/{id}', 'EventsController@getEvents');
+
+    // Tasks
+    Route::resource('tasks', 'TasksController');
+    Route::get('tasks-datatables', ['before' => 'csrf', 'as' => 'tasks.data', 'uses' => 'TasksController@getData']);
+
+    // Logs
+    Route::resource('logs', 'LogsController');
 });
 
 

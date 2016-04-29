@@ -39,8 +39,9 @@ class EventsController extends Controller
                     <td>Создатель</td>
                     <td>Время задания</td>
                     <td>Ответственный</td>
+                    <td>Тип</td>
                     <td>Описание</td>
-                    <td></td>
+                    <td>Действия</td>
                 </tr>
             </thead>
             <tbody>';
@@ -50,8 +51,10 @@ class EventsController extends Controller
                 $res .= '<td>' . UsersController::getUserName($event['user_id']) . '</td>';
                 $res .= '<td>' . $event['date'] . '</td>';
                 $res .= '<td>' . UsersController::getUserName($event['responsible_id']) . '</td>';
+                $res .= '<td>' . ($event['type'] == 1 ? 'Задача' : 'Событие') . '</td>';
                 $res .= '<td>' . $event['text'] . '</td>';
                 $res .= '<td align="center">
+                        <a href="#" data-event-id="' . $event->id . '" class="btn btn-primary btn-fab btn-fab-mini event_edit"><i class="material-icons">mode_edit</i></a>
                         <a class="btn btn-fab btn-fab-mini btn-danger event-destroy"
                             href="#"
                             data-event-id="' . $event['id'] . '">
@@ -62,7 +65,7 @@ class EventsController extends Controller
 
             $res .= '</tbody></table>';
         } else {
-            $res = 'Нет событий';
+            $res = '<p class="text-center">Нет событий</p>';
         }
 
 
@@ -91,6 +94,7 @@ class EventsController extends Controller
         $event->user_id = Sentry::getUser()->id;
         $event->responsible_id = $request->responsible_id;
         $event->company_id = $request->company_id;
+        $event->type = $request->type;
         $event->text = $request->text;
         $event->date = $request->date;
         $event->reminder = $request->reminder;
@@ -118,7 +122,8 @@ class EventsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $event = Event::find($id);
+        return view('main-module/events.update-form', ['event' => $event]);
     }
 
     /**
@@ -130,7 +135,15 @@ class EventsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $event = Event::find($id);;
+        $event->responsible_id = $request->responsible_id;
+        $event->type = $request->type;
+        $event->text = $request->text;
+        $event->date = $request->date;
+        $event->reminder = $request->reminder;
+        $event->save();
+
+        return 'Событие успешно обновлено!';
     }
 
     /**
