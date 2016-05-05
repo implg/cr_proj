@@ -358,4 +358,18 @@ select.custom-select {
   min-height: 700px;
 }
 
-.topPane {}
+#filter-form {
+  label {
+    color:#000;
+    font-size: 14px;
+    margin-top: 0;
+  }
+
+  .pull-left {
+    margin-right: 10px;
+  }
+
+  .btn {
+    margin-top: 21px;
+  }
+}

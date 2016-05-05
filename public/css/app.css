@@ -10210,4 +10210,15 @@ select.custom-select {
 #split {
   min-height: 700px; }
 
+#filter-form label {
+  color: #000;
+  font-size: 14px;
+  margin-top: 0; }
+
+#filter-form .pull-left {
+  margin-right: 10px; }
+
+#filter-form .btn {
+  margin-top: 21px; }
+
 /*# sourceMappingURL=app.css.map */

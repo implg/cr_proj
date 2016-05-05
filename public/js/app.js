@@ -1,6 +1,4 @@
 $(document).ready(function() {
-    $.material.init();
-
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -8,6 +6,12 @@ $(document).ready(function() {
     });
     $.datetimepicker.setLocale('ru');
     $('.datetimepicker').datetimepicker();
+
+    $('.datetimepicker2').datetimepicker({
+        format:'Y-m-d H:i:s'
+    });
+
+    $.material.init();
 });
 $(document).ready(function() {
     $('#split').split({

@@ -42,6 +42,7 @@ Route::group(['middleware' => 'sentry.auth'], function() {
 
     // Logs
     Route::resource('logs', 'LogsController');
+    Route::get('logs-datatables', ['before' => 'csrf', 'as' => 'logs.data', 'uses' => 'LogsController@getData']);
 });
 
 

@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\Datatables\Datatables;
 use Sentry;
-use App\Http\Controllers\UsersController;
 
 use App\Http\Requests;
 
@@ -189,6 +188,7 @@ class CompanyController extends Controller
     {
         $company = Company::create($request->except('_token'));
         $request->session()->flash('success', 'Предприятие "' . $company->name . '" успешно создано!');
+        LogsController::store($this->userId, 'Создание предприятия "' . $company->name . '"');
         return redirect(route('home'));
     }
 
@@ -235,6 +235,7 @@ class CompanyController extends Controller
         $company = Company::find($id);
         $company->update($request->except('_token'));
         $request->session()->flash('success', 'Предприятие "' . $company->name . '" успешно изменено!');
+        LogsController::store($this->userId, 'Изменение предприятия "' . $company->name . '"');
         return redirect(route('home'));
     }
 
@@ -249,6 +250,7 @@ class CompanyController extends Controller
     {
         Company::destroy($id);
         $request->session()->flash('success', 'Предприятие успешно удалено!');
+        LogsController::store($this->userId, 'Удаление предприятия ID: '. $id);
         return redirect(route('home'));
     }
 }

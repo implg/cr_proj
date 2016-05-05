@@ -12,7 +12,21 @@
             <h2>Логи</h2>
         </div>
 
-        <table class="table table-bordered" id="task-events">
+        <form id="filter-form">
+            <div class="pull-left">
+                <label for="inputEmail3" class="control-label">Диапазон времени, от:</label>
+                <input type="text" class="custom-input datetimepicker2" name="date-start">
+            </div>
+            <div class="pull-left">
+                <label for="inputEmail3" class="control-label">Диапазон времени, до:</label>
+                <input type="text" class="custom-input datetimepicker2" name="date-end">
+            </div>
+            <div class="pull-left">
+                <button class="btn btn-raised btn-success btn-sm" type="submit">Поиск</button>
+            </div>
+        </form>
+
+        <table class="table table-bordered" id="logs">
             <thead>
                 <tr>
                     <th>Id</th>
@@ -32,31 +46,30 @@
 
 @push('scripts')
 <script>
-    {{--$(function() {--}}
-        {{--$('#task-events').DataTable({--}}
-            {{--processing: true,--}}
-            {{--serverSide: true,--}}
-            {{--paging: false,--}}
-            {{--info: false,--}}
-            {{--oLanguage: {--}}
-                {{--sSearch: "Поиск:",--}}
-                {{--sZeroRecords: "Ничего не найдено",--}}
-                {{--sProcessing: "Загрузка"--}}
-            {{--},--}}
-            {{--ajax: '{{ route('tasks.data') }}',--}}
-            {{--columns: [--}}
-                {{--null,--}}
-                {{--{ "width": "10%", className: "bold" },--}}
-                {{--{ "width": "12%", className: "bold" },--}}
-                {{--{ "width": "12%"},--}}
-                {{--{ "width": "12%" },--}}
-                {{--{ "width": "49%" },--}}
-                {{--{--}}
-                    {{--width: "8%",--}}
-                    {{--className: "text-center"--}}
-                {{--}--}}
-            {{--]--}}
-        {{--});--}}
-    {{--});--}}
+    $(function() {
+        var oTable = $('#logs').DataTable({
+            processing: true,
+            serverSide: true,
+            paging: false,
+            info: false,
+            oLanguage: {
+                sSearch: "Поиск:",
+                sZeroRecords: "Ничего не найдено",
+                sProcessing: "Загрузка"
+            },
+            ajax: {
+                url: '{{ route('logs.data') }}',
+                data: function (d) {
+                    d.dateStart = $('input[name=date-start]').val();
+                    d.dateEnd = $('input[name=date-end]').val();
+                }
+            }
+        });
+
+        $('#filter-form').on('submit', function(e) {
+            oTable.draw();
+            e.preventDefault();
+        });
+    });
 </script>
 @endpush

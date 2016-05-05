@@ -6,6 +6,7 @@ use App\Branch;
 use App\User;
 use Illuminate\Http\Request;
 use Sentry;
+use App\Http\Controllers\LogsController;
 
 use App\Http\Requests;
 
@@ -72,6 +73,7 @@ class BranchesController extends Controller
         $branch->name = $request->name;
         $branch->save();
         $request->session()->flash('success', 'Филлиал успешно создан!');
+        LogsController::store($this->userId, 'Создание нового филиала');
         return redirect()->back();
     }
 
@@ -111,6 +113,7 @@ class BranchesController extends Controller
         $branch->name = $request->name;
         $branch->save();
         $request->session()->flash('success', 'Филиал "' . $branch->name . '" успешно изменен!');
+        LogsController::store($this->userId, 'Изменение филиала "' . $branch->name . '"');
         return redirect(route('branches.index'));
     }
 
@@ -120,10 +123,11 @@ class BranchesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request,$id)
+    public function destroy(Request $request, $id)
     {
         Branch::destroy($id);
         $request->session()->flash('success', 'Филиал успешно удален!');
+        LogsController::store($this->userId, 'Удаление филиала: ID ' . $id);
         return redirect()->back();
     }
 }

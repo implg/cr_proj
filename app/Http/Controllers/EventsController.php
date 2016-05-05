@@ -7,11 +7,20 @@ use App\Event;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Log;
 use Sentry;
-use App\Http\Controllers\UsersController;
+use App\Http\Controllers\LogsController;
 
 class EventsController extends Controller
 {
+    /**
+     * EventsController constructor.
+     */
+    public function __construct()
+    {
+        $this->userId = Sentry::getUser()->id;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -99,7 +108,7 @@ class EventsController extends Controller
         $event->date = $request->date;
         $event->reminder = $request->reminder;
         $event->save();
-
+        LogsController::store($this->userId, 'Создание нового события');
         return 'Событие успешно создано!';
     }
 
@@ -142,7 +151,7 @@ class EventsController extends Controller
         $event->date = $request->date;
         $event->reminder = $request->reminder;
         $event->save();
-
+        LogsController::store($this->userId, 'Изменение события: ID ' . $id);
         return 'Событие успешно обновлено!';
     }
 
@@ -155,6 +164,7 @@ class EventsController extends Controller
     public function destroy($id)
     {
         Event::destroy($id);
+        LogsController::store($this->userId, 'Удаление события: ID ' . $id);
         return 'Событие удалено';
     }
 }
