@@ -50,8 +50,7 @@ return [
 
         'public' => [
             'driver' => 'local',
-            'root' => storage_path('app/public'),
-            'visibility' => 'public',
+            'root'   => storage_path('app/public/upload'),
         ],
 
         's3' => [
@@ -61,7 +60,6 @@ return [
             'region' => 'your-region',
             'bucket' => 'your-bucket',
         ],
-
     ],
 
 ];

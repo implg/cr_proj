@@ -11,6 +11,8 @@
 |
 */
 
+use Illuminate\Support\Facades\Input;
+
 Route::get('/', ['middleware' => 'sentry.auth', 'as' => 'home', 'uses' => 'MainController@index']);
 
 Route::group(['middleware' => 'sentry.admin'], function() {
@@ -43,6 +45,17 @@ Route::group(['middleware' => 'sentry.auth'], function() {
     // Logs
     Route::resource('logs', 'LogsController');
     Route::get('logs-datatables', ['before' => 'csrf', 'as' => 'logs.data', 'uses' => 'LogsController@getData']);
+
+    // Helps
+    Route::resource('help', 'HelpsController');
 });
+
+Route::get('glide/{path}', function($path){
+    $server = \League\Glide\ServerFactory::create([
+        'source' => app('filesystem')->disk('public')->getDriver(),
+        'cache' => storage_path('glide'),
+    ]);
+    return $server->getImageResponse($path, Input::query());
+})->where('path', '.+');
 
 

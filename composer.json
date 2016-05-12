@@ -9,7 +9,9 @@
         "laravel/framework": "5.2.*",
         "rydurham/sentinel": "~2.3",
         "laravelcollective/html": "~5.0",
-        "yajra/laravel-datatables-oracle": "^6.10"
+        "yajra/laravel-datatables-oracle": "^6.10",
+        "barryvdh/laravel-elfinder": "^0.3.7",
+        "league/glide": "^1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

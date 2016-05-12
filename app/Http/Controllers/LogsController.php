@@ -57,6 +57,9 @@ class LogsController extends Controller
                 if ($request->has('dateStart') and $request->has('dateEnd')) {
                     $query->whereBetween('logs.created_at', [$request->get('dateStart'), $request->get('dateEnd')]);
                 }
+                if ($request->has('userId')) {
+                    $query->where('logs.user_id', '=', $request->get('userId'));
+                }
             })
             ->make();
     }

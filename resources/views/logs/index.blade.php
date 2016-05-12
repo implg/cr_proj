@@ -5,26 +5,31 @@
 @endsection
 
 @section('content')
-
+    <?php
+    $users = Users::getAllUser();
+    ?>
 <div class="row">
     <div class="col-md-12">
         <div class="page-header">
             <h2>Логи</h2>
         </div>
 
-        <form id="filter-form">
+        {!! Form::open(array('id' => 'filter-form')) !!}
             <div class="pull-left">
-                <label for="inputEmail3" class="control-label">Диапазон времени, от:</label>
-                <input type="text" class="custom-input datetimepicker2" name="date-start">
+                {!! Form::label('userId', 'Пользователь') !!}
+                {!! Form::select('userId', ['' => '', 'Выберите' => $users->lists('full_name', 'id')], null, ['class' => 'custom-select']) !!}
+            </div><div class="pull-left">
+                {!! Form::label('date-start', 'Диапазон времени, от:') !!}
+                {!! Form::text('date-start', null, ['class' => 'custom-input datetimepicker2']) !!}
             </div>
             <div class="pull-left">
-                <label for="inputEmail3" class="control-label">Диапазон времени, до:</label>
-                <input type="text" class="custom-input datetimepicker2" name="date-end">
+                {!! Form::label('date-end', 'Диапазон времени, до:') !!}
+                {!! Form::text('date-end', null, ['class' => 'custom-input datetimepicker2']) !!}
             </div>
             <div class="pull-left">
-                <button class="btn btn-raised btn-success btn-sm" type="submit">Поиск</button>
+                {!! Form::submit('Поиск', ['class' => 'btn btn-raised btn-success btn-sm']) !!}
             </div>
-        </form>
+        {!! Form::close() !!}
 
         <table class="table table-bordered" id="logs">
             <thead>
@@ -47,11 +52,15 @@
 @push('scripts')
 <script>
     $(function() {
+
+
         var oTable = $('#logs').DataTable({
             processing: true,
             serverSide: true,
             paging: false,
             info: false,
+            bFilter: false,
+            bInfo: false,
             oLanguage: {
                 sSearch: "Поиск:",
                 sZeroRecords: "Ничего не найдено",
@@ -62,6 +71,7 @@
                 data: function (d) {
                     d.dateStart = $('input[name=date-start]').val();
                     d.dateEnd = $('input[name=date-end]').val();
+                    d.userId = $('select[name=userId]').val();
                 }
             }
         });

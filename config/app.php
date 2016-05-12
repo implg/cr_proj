@@ -161,8 +161,7 @@ return [
         Sentinel\SentinelServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,
         'Collective\Html\HtmlServiceProvider',
-
-
+        'Barryvdh\Elfinder\ElfinderServiceProvider',
     ],
 
     /*

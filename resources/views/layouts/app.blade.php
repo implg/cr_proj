@@ -48,7 +48,7 @@
                     @endif
                     <li><a href="{{ route('tasks.index') }}">Задачи</a></li>
                     <li><a href="{{ route('logs.index') }}">Логи</a></li>
-                    <li><a href="/">Помощь</a></li>
+                    <li><a href="{{ route('help.index') }}">Помощь</a></li>
                 @endif
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -100,6 +100,7 @@
 <script src="{{ asset('libs/datetimepicker-master/build/jquery.datetimepicker.full.min.js') }}"></script>
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('packages/rydurham/sentinel/js/restfulizer.js') }}"></script>
+<script src="{{ asset('libs/ckeditor/ckeditor.js') }}"></script>
 @stack('scripts')
 </body>
 </html>
