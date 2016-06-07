@@ -59,12 +59,12 @@ class CompanyController extends Controller
         } else {
             $userBranch = User::find($this->userId)->branches;
 
-            if(Sentry::getUser()->hasAccess('manager')) {
+            if (Sentry::getUser()->hasAccess('manager')) {
                 $companies = DB::table('company')
                     ->whereIn('branch_id', $userBranch->lists('id'))
                     ->leftJoin('branches', 'company.branch_id', '=', 'branches.id')
                     ->leftJoin('groups_company', 'company.group_id', '=', 'groups_company.id')
-                    ->where('groups_company.name', '=', 'Поставщик')
+                    ->where('groups_company.name', '!=', 'Поставщик')
                     ->leftJoin('users', 'company.manager_id', '=', 'users.id')
                     ->select([
                         'company.id',
@@ -112,8 +112,19 @@ class CompanyController extends Controller
                 if ($request->has('status')) {
                     $query->where('company.status', '=', $request->get('status'));
                 }
+                if ($request->has('search')) {
+                    $query->where('company.name', 'like', "%{$request->get('search')}%")
+                        ->orWhere('company.phone_accountant', 'like', "%{$request->get('search')}%")
+                        ->orWhere('company.phones', 'like', "%{$request->get('search')}%")
+                        ->orWhere('company.city', 'like', "%{$request->get('search')}%")
+                        ->orWhere('company.director', 'like', "%{$request->get('search')}%")
+                        ->orWhere('company.employee', 'like', "%{$request->get('search')}%")
+                        ->orWhere('company.email', 'like', "%{$request->get('search')}%")
+                        ->orWhere('company.address_legal', 'like', "%{$request->get('search')}%")
+                        ->orWhere('company.address_physical', 'like', "%{$request->get('search')}%")
+                        ->get();;
+                }
             })
-
             ->addColumn('action', function ($company) {
                 return '
                     <a href="/company/' . $company->id . '/edit" class="btn btn-primary btn-fab btn-fab-mini "><i class="material-icons">mode_edit</i></a>
@@ -141,7 +152,8 @@ class CompanyController extends Controller
      * @param $statusId
      * @return string
      */
-    public function getStatus($statusId) {
+    public function getStatus($statusId)
+    {
         switch ($statusId) {
             case 1:
                 $status = '<img src="/images/status/1.png" title="Черный список"> - Черный список';
@@ -159,6 +171,25 @@ class CompanyController extends Controller
                 $status = '<img src="/images/status/0.png" title="Без статуса"> - Без статуса';
         }
         return $status;
+    }
+
+    /**
+     * @return mixed
+     */
+    public static function getAllCompany()
+    {
+        $users = DB::table('company')->select('id', 'name');
+        return $users;
+    }
+
+    /**
+     * @param $companyId
+     * @return string
+     */
+    public static function getCompanyName($companyId)
+    {
+        $company = Company::findOrFail($companyId);
+        return $company->name;
     }
 
     /**
@@ -250,7 +281,7 @@ class CompanyController extends Controller
     {
         Company::destroy($id);
         $request->session()->flash('success', 'Предприятие успешно удалено!');
-        LogsController::store($this->userId, 'Удаление предприятия ID: '. $id);
+        LogsController::store($this->userId, 'Удаление предприятия ID: ' . $id);
         return redirect(route('home'));
     }
 }

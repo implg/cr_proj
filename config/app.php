@@ -158,6 +158,7 @@ return [
 
         App\Providers\BranchUserProvider::class,
         App\Providers\UsersProvider::class,
+        App\Providers\NotificationsProvider::class,
         Sentinel\SentinelServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,
         'Collective\Html\HtmlServiceProvider',
@@ -212,6 +213,7 @@ return [
         'Html' => 'Collective\Html\HtmlFacade',
         'BranchUser' => App\Http\Controllers\BranchUserController::class,
         'Users' => App\Http\Controllers\UsersController::class,
+        'Notifications' => App\Http\Controllers\NotificationsController::class,
         'Datatables' => Yajra\Datatables\Facades\Datatables::class,
 
     ],

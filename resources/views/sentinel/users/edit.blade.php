@@ -147,8 +147,8 @@
 
                     @if(! Sentry::getUser()->hasAccess('admin'))
                         <div class="form-group {{ $errors->has('oldPassword') ? 'has-error' : '' }}">
-                            <label for="oldPassword" class="sr-only">Old Password</label>
-                            <input class="form-control" placeholder="Old Password" name="oldPassword" value=""
+                            <label for="oldPassword" class="sr-only">Старый пароль</label>
+                            <input class="form-control" placeholder="Старый пароль" name="oldPassword" value=""
                                    id="oldPassword" type="password">
                         </div>
                     @endif
@@ -168,9 +168,9 @@
                     <input name="_token" value="{{ csrf_token() }}" type="hidden">
                     <input class="btn btn-raised btn-success" value="Изменить пароль" type="submit">
 
-                    {{ ($errors->has('oldPassword') ? '<br />' . $errors->first('oldPassword') : '') }}
-                    {{ ($errors->has('newPassword') ?  '<br />' . $errors->first('newPassword') : '') }}
-                    {{ ($errors->has('newPassword_confirmation') ? '<br />' . $errors->first('newPassword_confirmation') : '') }}
+                    {!!   ($errors->has('oldPassword') ? '<br />' . $errors->first('oldPassword') : '') !!}
+                    {!! ($errors->has('newPassword') ?  '<br />' . $errors->first('newPassword') : '') !!}
+                    {!! ($errors->has('newPassword_confirmation') ? '<br />' . $errors->first('newPassword_confirmation') : '') !!}
 
                 </form>
 

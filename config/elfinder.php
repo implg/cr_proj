@@ -27,7 +27,7 @@ return array(
     */
     'disks' => [
         'public' => [
-            'glideURL' => '/elfinder',
+            'glideURL' => '/glide',
         ]
     ],
 
@@ -83,12 +83,12 @@ return array(
         'roots'  => array(
             array(
                 'driver' => 'LocalFileSystem',
-                'path'   => storage_path('app/public/upload'),
-                'URL'    => '/upload'
+                'path'   => storage_path('app/public'),
+                'URL'    => storage_path('app/public')
             ),
         )
     ),
-    
+
     /*
     |--------------------------------------------------------------------------
     | Root Options

@@ -54,6 +54,23 @@
             <ul class="nav navbar-nav navbar-right">
 
                 @if (Sentry::check())
+
+                    @if(Notifications::getTodayTasks())
+                        <li class="notification">
+                            <a href="{{ route('tasks.index') }}" class="tooltip" data-toggle="tooltip" data-placement="bottom" title="Для Вас есть новые задачи на сегодня">
+                                <i class="material-icons">event_note</i><span class="label label-danger">New</span>
+                            </a>
+                        </li>
+                    @endif
+
+                    @if(Notifications::helpMessage())
+                        <li class="notification">
+                            <a href="{{ route('help.index') }}" class="tooltip" data-toggle="tooltip" data-placement="bottom" title="Для Вас есть новая статья">
+                                <i class="material-icons">help_outline</i><span class="label label-danger">New</span>
+                            </a>
+                        </li>
+                    @endif
+
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false"><i
@@ -94,13 +111,23 @@
 </div>
 <!-- ./ container -->
 
+
+@if (Sentry::check())
+    <?php $tasks = Notifications::getCountTodayTasks(); ?>
+    @if($tasks)
+        <div class="alert alert-danger notifi-fix"><a href="{{ route('tasks.index') }}">Количество новых задач на сегодня: <b>{{ $tasks }}</b></a></div>
+    @endif
+@endif
+
+
 <!-- Javascripts
 ================================================== -->
 <script src="{{ asset('js/dependencies.js') }}"></script>
 <script src="{{ asset('libs/datetimepicker-master/build/jquery.datetimepicker.full.min.js') }}"></script>
-<script src="{{ asset('js/app.js') }}"></script>
-<script src="{{ asset('packages/rydurham/sentinel/js/restfulizer.js') }}"></script>
 <script src="{{ asset('libs/ckeditor/ckeditor.js') }}"></script>
+<script src="{{ asset('packages/rydurham/sentinel/js/restfulizer.js') }}"></script>
+<script src="{{ asset('js/app.js') }}"></script>
+
 @stack('scripts')
 </body>
 </html>

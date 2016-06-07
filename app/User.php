@@ -31,4 +31,12 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Branch');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function helps()
+    {
+        return $this->belongsToMany('App\Help', 'help_user');
+    }
 }

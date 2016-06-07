@@ -8,8 +8,8 @@ $users = Users::getAllUser();
 </div>
 
 <div class="form-group">
-    {!! Form::label('addressee', 'Адресат') !!}
-    {!! Form::select('addressee', ['' => '', 'Выберите' => $users->lists('full_name', 'id')], null, ['class' => 'custom-select']) !!}
+    {!! Form::label('addressee', 'Для пользователей (зажав ctrl можно выбрать несколько)') !!}
+    {!! Form::select('addressee[]', $users->lists('full_name', 'id'), (isset($articleUsers) ? array_flatten($articleUsers->lists('id')) : null), ['class' => 'custom-select', 'multiple']) !!}
 </div>
 
 <div class="form-group">

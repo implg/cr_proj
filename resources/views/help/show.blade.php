@@ -8,11 +8,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="page-header">
-                <h2>{{ $article->title }}
-                    @if($article->addressee != 0)
-                        <small>Для пользователя: {{ Users::getUserName($article->addressee) }}</small>
-                    @endif
-                </h2>
+                <h2>{{ $article->title }}</h2>
             </div>
             {!! $article->text !!}
         </div>

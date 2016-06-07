@@ -31,10 +31,8 @@ class BranchUserController extends Controller
     {
         $user = User::find($userId)->branches;
 
-        foreach ($user as $_branch)
-        {
-            if ($_branch->id == $branchId)
-            {
+        foreach ($user as $_branch) {
+            if ($_branch->id == $branchId) {
                 return true;
             }
         }
@@ -51,12 +49,12 @@ class BranchUserController extends Controller
     public function updateBranchUser(Request $request)
     {
         $user = User::find($request->userId);
-        if($request->has('fullAccess')) {
+        if ($request->has('fullAccess')) {
             $user->full_access = 1;
             $user->save();
             $user->branches()->detach();
         } else {
-            if(count($request->branches)) {
+            if (count($request->branches)) {
                 $user->branches()->sync($request->branches);
             } else {
                 $user->branches()->detach();

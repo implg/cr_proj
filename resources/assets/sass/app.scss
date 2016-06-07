@@ -66,8 +66,13 @@
   z-index: 1000;
 }
 
+html {
+  height: 100%;
+}
+
 body {
   font-family: 'Open Sans', sans-serif;
+  padding-bottom: 30px;
 }
 
 .material-icons {
@@ -217,8 +222,6 @@ body .container-fluid .well {
 
 #companies {
   overflow: auto;
-  position: relative;
-  top: -40px;
 
   #company-table_filter {
     margin-bottom: 5px;
@@ -383,3 +386,62 @@ form label {
 .control {
   margin-top: 15px;
 }
+
+.notification {
+
+}
+
+.notification i {
+  font-size: 30px;
+  line-height: 24px;
+  float: left;
+}
+
+.notification span {
+  position: relative;
+  top:-10px;
+  font-size: 9px;
+}
+
+.dataTables_length label {
+  color: #000 !important;
+}
+
+.info-task_new {
+  background-color: rgba(255, 87, 34, 0.33) !important;
+}
+
+.info-task_in-work {
+  background-color: rgba(3, 169, 244, 0.2) !important;
+}
+
+.info-task_executed {
+  background-color: rgba(76, 175, 80, 0.5) !important;
+}
+
+
+.dataTables_filter {
+  display: none;
+}
+
+.notifi-fix {
+  width: 370px;
+  padding: 18px 20px;
+  font-size: 17px;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  right: 20px;
+  a:hover {
+    text-decoration: none;
+  }
+}
+
+select[multiple=multiple] {
+  height: 105px;
+}
+
+.comment-task-complete {
+  display: none;
+}
+

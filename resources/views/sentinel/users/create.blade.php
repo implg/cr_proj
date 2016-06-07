@@ -62,10 +62,10 @@
                                            name="password_confirmation" value="" type="password">
                                     {{ ($errors->has('password_confirmation') ?  $errors->first('password_confirmation') : '') }}
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group hidden">
                                     <div class="checkbox">
                                         <label>
-                                            <input name="activate" value="activate" type="checkbox"> Активен
+                                            <input name="activate" value="activate" type="checkbox" checked> Активен
                                         </label>
                                     </div>
                                 </div>

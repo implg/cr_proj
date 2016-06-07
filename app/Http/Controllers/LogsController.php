@@ -40,7 +40,8 @@ class LogsController extends Controller
                     'logs.id',
                     'logs.created_at',
                     DB::raw('concat(users.first_name, " ", users.last_name) as full_name'),
-                    'logs.action']);
+                    'logs.action'])
+                ->orderBy('created_at', 'desc');
         } else {
             $logs = DB::table('logs')
                 ->leftJoin('users', 'logs.user_id', '=', 'users.id')
@@ -49,7 +50,8 @@ class LogsController extends Controller
                     'logs.id',
                     'logs.created_at',
                     DB::raw('concat(users.first_name, " ", users.last_name) as full_name'),
-                    'logs.action']);
+                    'logs.action'])
+                ->orderBy('created_at', 'desc');
         }
 
         return Datatables::of($logs)
@@ -78,7 +80,7 @@ class LogsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public static function store($userId, $action)
@@ -92,7 +94,7 @@ class LogsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -103,7 +105,7 @@ class LogsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -114,8 +116,8 @@ class LogsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -126,7 +128,7 @@ class LogsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

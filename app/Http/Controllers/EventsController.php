@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Company;
 use App\Event;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -38,7 +39,7 @@ class EventsController extends Controller
      */
     public function getEvents($companyId)
     {
-        $events = Company::find($companyId)->events;
+        $events = Company::find($companyId)->events()->where('type', 0)->get();
 
         if (count($events)) {
             $res = '<table class="table table-bordered dataTable no-footer" id="events-table">
@@ -46,7 +47,7 @@ class EventsController extends Controller
                 <tr>
                     <td>ID</td>
                     <td>Создатель</td>
-                    <td>Время задания</td>
+                    <td>Время события</td>
                     <td>Ответственный</td>
                     <td>Тип</td>
                     <td>Описание</td>
@@ -100,12 +101,13 @@ class EventsController extends Controller
     public function store(Request $request)
     {
         $event = new Event;
-        $event->user_id = Sentry::getUser()->id;
+        $event->user_id = $this->userId;
         $event->responsible_id = $request->responsible_id;
         $event->company_id = $request->company_id;
         $event->type = $request->type;
         $event->text = $request->text;
         $event->date = $request->date;
+        $event->status = 0;
         $event->reminder = $request->reminder;
         $event->save();
         LogsController::store($this->userId, 'Создание нового события');
@@ -144,13 +146,28 @@ class EventsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $event = Event::find($id);;
+        $event = Event::find($id);
         $event->responsible_id = $request->responsible_id;
         $event->type = $request->type;
         $event->text = $request->text;
         $event->date = $request->date;
+        $event->status = $request->status;
         $event->reminder = $request->reminder;
         $event->save();
+
+        if($request->status == 2 and !empty($request->taskComplete)) {
+            $eventCompl = new Event;
+            $eventCompl->user_id = $this->userId;
+            $eventCompl->responsible_id = 0;
+            $eventCompl->company_id = $event->company_id;
+            $eventCompl->type = 0;
+            $eventCompl->text = $request->taskComplete;
+            $eventCompl->date = Carbon::now();
+            $eventCompl->status = 0;
+            $eventCompl->reminder = 0;
+            $eventCompl->save();
+        }
+
         LogsController::store($this->userId, 'Изменение события: ID ' . $id);
         return 'Событие успешно обновлено!';
     }

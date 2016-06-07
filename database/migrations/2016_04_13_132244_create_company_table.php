@@ -18,13 +18,13 @@ class CreateCompanyTable extends Migration
             $table->integer('branch_id');
             $table->string('name');
             $table->integer('status');
-            $table->string('phone_accountant');
-            $table->string('phones');
-            $table->string('city');
+            $table->text('phone_accountant');
+            $table->text('phones');
+            $table->text('city');
             $table->string('director');
             $table->string('site');
             $table->string('employee');
-            $table->string('email');
+            $table->text('email');
             $table->string('isq');
             $table->string('skype');
             $table->string('facebook');

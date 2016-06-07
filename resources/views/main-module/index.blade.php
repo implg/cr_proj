@@ -79,8 +79,9 @@
                 </div>
 
                 <div class="pull-left">
-                    <button class="btn btn-raised btn-success btn-sm" type="submit">Поиск</button>
+                    <input type="text" name="search" id="search-str" class="custom-input" placeholder="Поиск...">
                 </div>
+
                 <div class="pull-left">
                     <button class="btn btn-raised btn-danger btn-sm filter_reset" type="reset">Сбросить</button>
                 </div>
@@ -149,10 +150,27 @@
             serverSide: true,
             paging: false,
             info: false,
-            oLanguage: {
-                sSearch: "Поиск:",
-                sZeroRecords: "Ничего не найдено",
-                sProcessing: "Загрузка"
+            language: {
+                processing: "Подождите...",
+                search: "Поиск:",
+                lengthMenu: "Показать _MENU_ задач",
+                info: "Предприятия с _START_ до _END_ из _TOTAL_ предприятий",
+                infoEmpty: "Предприятия с 0 до 0 из 0 предприятий",
+                infoFiltered: "(отфильтровано из _MAX_ предприятий)",
+                infoPostFix: "",
+                loadingRecords: "Загрузка предприятий...",
+                zeroRecords: "Предприятия отсутствуют.",
+                emptyTable: "В таблице отсутствуют данные",
+                paginate: {
+                    first: "Первая",
+                    previous: "Предыдущая",
+                    next: "Следующая",
+                    last: "Последняя"
+                },
+                aria: {
+                    sortAscending: ": активировать для сортировки столбца по возрастанию",
+                    sortDescending: ": активировать для сортировки столбца по убыванию"
+                }
             },
             ajax: {
                 url: '{!! route('company.index') !!}',
@@ -160,6 +178,7 @@
                     d.branch_id = $('#branch_id').val();
                     d.group_id = $('#group_id').val();
                     d.status = $('#status').val();
+                    d.search = $('#search-str').val();
                 }
             },
             columns: [
@@ -183,10 +202,20 @@
             ]
         });
 
-        $('#search-form').on('submit', function (e) {
+        $('#branch_id,  #group_id, #status, .event_type').on('change', function (e) {
             e.preventDefault();
             table.draw();
         });
+
+        $('#search-str').on('input', function (e) {
+            e.preventDefault();
+            $('#branch_id').val("");
+            $('#group_id').val("");
+            $('#status').val("");
+            $('.event_type').val("");
+            table.draw();
+        });
+
 
         $('.filter_reset').on('click', function (e) {
             e.preventDefault();
@@ -194,6 +223,7 @@
             $('#group_id').val("");
             $('#status').val("");
             $('.event_type').val("");
+            $('#search-str').val("");
             table.draw();
         });
 

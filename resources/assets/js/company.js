@@ -8,10 +8,18 @@ $(document).ready(function() {
     //clear modal form for event editing
     $('body').on('click', '.event_edit', function (e) {
         var eventId = $(this).data('event-id');
+
         $.get('/events/' + eventId + '/edit', function (data) {
             $('.update_modal_event .modal-content').html(data);
             $('.update_modal_event').modal('show');
-            $('.datetimepicker2').datetimepicker();
+            $.material.init();
+            setTimeout(function() {
+                $('.datetimepicker3').datetimepicker();
+                $('.datetimepicker3').datetimepicker('show');
+                setTimeout(function() {
+                    $('.datetimepicker3').datetimepicker('hide');
+                },100)
+            },700)
         })
     });
 
@@ -23,9 +31,10 @@ $(document).ready(function() {
             company_id = $('.add_event').data('company-id'),
             type = $(this).find('.event_type').val(),
             text = $(this).find('.event_text').val(),
+            taskComplete = $(this).find('.taskComplete').val(),
             date = $(this).find('.event_date').val(),
+            status = $(this).find('.event_status').val(),
             reminder = $('.event_reminder').prop('checked') ? 1 : 0;
-
         $.ajax({
             url: '/events/' + event_id,
             type: 'put',
@@ -34,23 +43,28 @@ $(document).ready(function() {
                 'company_id': company_id,
                 'type': type,
                 'text': text,
+                'taskComplete': taskComplete,
                 'date': date,
-                'reminder': reminder
+                'reminder': reminder,
+                'status': status
             },
             success: function (data) {
                 $('.update_modal_event').modal('hide');
-                console.log(text);
                 // Get events for company
-                $.ajax({
-                    url: 'events-company/' + company_id,
-                    type: 'get',
-                    data: {
-                        'companyId': company_id
-                    },
-                    success: function (data) {
-                        $('#events').html(data);
-                    }
-                });
+                if(company_id) {
+                    $.ajax({
+                        url: 'events-company/' + company_id,
+                        type: 'get',
+                        data: {
+                            'companyId': company_id
+                        },
+                        success: function (data) {
+                            $('#events').html(data);
+                        }
+                    });
+                } else {
+                    window.location.reload();
+                }
             }
         });
     });
@@ -79,6 +93,15 @@ $(document).ready(function() {
             }
         });
 
+    });
+
+    // Tasks
+
+    $(document).on('change', '.change_task #status', function() {
+        var status = $(this).val();
+        if(status == 2) {
+            $('.comment-task-complete').slideDown();
+        }
     });
 
 });

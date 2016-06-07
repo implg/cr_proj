@@ -27,9 +27,10 @@ class UsersController extends Controller
      * @param $userId
      * @return string
      */
-    public static function getUserName($userId) {
+    public static function getUserName($userId)
+    {
         $userName = User::find($userId);
-        return $userName['first_name'].' '.$userName['last_name'];
+        return $userName['first_name'] . ' ' . $userName['last_name'];
     }
 
 

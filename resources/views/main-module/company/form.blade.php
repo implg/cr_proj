@@ -109,7 +109,7 @@
 
         <div class="form-group label-floating">
             {!! Form::label('email', 'E-mail', ['class' => 'control-label']) !!}
-            {!! Form::email('email', null, ['class' => 'form-control'] ) !!}
+            {!! Form::text('email', null, ['class' => 'form-control'] ) !!}
         </div>
 
         <div class="form-group label-floating">

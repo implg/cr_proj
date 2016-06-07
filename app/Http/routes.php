@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Input;
 
 Route::get('/', ['middleware' => 'sentry.auth', 'as' => 'home', 'uses' => 'MainController@index']);
 
-Route::group(['middleware' => 'sentry.admin'], function() {
+Route::group(['middleware' => 'sentry.admin'], function () {
 
     // Branches
     Route::resource('branches', 'BranchesController');
@@ -29,7 +29,7 @@ Route::group(['middleware' => 'sentry.admin'], function() {
 
 });
 
-Route::group(['middleware' => 'sentry.auth'], function() {
+Route::group(['middleware' => 'sentry.auth'], function () {
 
     // Company
     Route::resource('company', 'CompanyController');
@@ -50,7 +50,7 @@ Route::group(['middleware' => 'sentry.auth'], function() {
     Route::resource('help', 'HelpsController');
 });
 
-Route::get('glide/{path}', function($path){
+Route::get('glide/{path}', function ($path) {
     $server = \League\Glide\ServerFactory::create([
         'source' => app('filesystem')->disk('public')->getDriver(),
         'cache' => storage_path('glide'),

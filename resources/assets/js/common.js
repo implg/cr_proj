@@ -12,4 +12,6 @@ $(document).ready(function() {
     });
 
     $.material.init();
+
+    $('.tooltip').tooltip();
 });
